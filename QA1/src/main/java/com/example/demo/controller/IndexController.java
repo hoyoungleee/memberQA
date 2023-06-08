@@ -10,5 +10,9 @@ public class IndexController {
 	public String index() {
 		return "index";
 	}
+	@GetMapping("/reg.do")
+	public String regMember() {
+		return "regMember";
+	}
 
 }

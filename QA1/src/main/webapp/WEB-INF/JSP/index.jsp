@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <title>방문을 환영합니다.</title>
 </head>
 <body>
@@ -18,7 +19,11 @@
 		<h2>비밀번호</h2>
 		<br>
 		<input required="required">
-		<button >로그인</button>
+		<input type="submit" value="로그인하기"/>
 	</form>
+	
+	<hr>
+	<br>
+	<strong>아직 회원이 아니시라면<strong> <a href="/reg.do">회원가입하기</a>
 </body>
 </html>
