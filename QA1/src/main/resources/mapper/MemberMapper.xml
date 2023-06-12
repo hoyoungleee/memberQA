@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.MemberMapper">	<!-- mapper 인터페이스가 위치하는 경로 -->
-    <select id="getUserList" resultType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
-        SELECT *
-        FROM member	<!-- SQL문 작성 -->
+    <select id="getLoginCheck" resultType="int" parameterType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
+        SELECT count(*)
+        FROM member
+        WHERE id = #{id} AND pw = #{pw}	<!-- SQL문 작성 -->
     </select>
+    <select id="getIdCheck" resultType="int" parameterType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
+        SELECT count(*)
+        FROM member	
+        where id = #{id}
+        <!-- SQL문 작성 -->
+    </select>
+    <insert id="joinMember"  parameterType="com.example.demo.vo.MemberVO">
+    	INSERT INTO member(id,pw,name,birth,gender,address,email,auth, del_yn) VALUE (#{id},#{pw},#{name},#{birth},#{gender},#{address},#{email},'2', 'N');
+    </insert>
+    <update id="updateMember"  parameterType="com.example.demo.vo.MemberVO">
+    	UPDATE member SET pw = #{pw}, name = #{name}, birth = #{birth}, gender = #{gender}, address = #{address}, email = #{email} WHERE id = #{id}
+    </update>
+    <delete id="deleteMember" parameterType="com.example.demo.vo.MemberVO">
+		UPDATE member SET del_yn = 'Y' where id = #{id}
+    </delete>
 </mapper>
