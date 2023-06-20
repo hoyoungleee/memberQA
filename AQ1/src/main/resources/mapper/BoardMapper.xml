@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.BoardMapper">
+
+
+
+	<!-- ListSelect -->
+	<select id="getLists" parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
+		select
+		title,description,reg_dt,text_open,answer,admin_answer,p_id,user FROM
+		hj_board
+	</select>
+
+
+	<!-- insert -->
+	<insert id="insert" parameterType="com.example.demo.vo.BoardVO">
+		INSERT INTO HJ_BOARD (TITLE,
+		DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
+		ADMIN_ANSWER)
+		VALUES
+		(#{title},#{description},now(),#{text_open}, #{answer},
+		#{admin_answer})
+	</insert>
+
+	<!-- delete -->
+	<delete id="delete" parameterType="com.example.demo.vo.BoardVO" >
+		DELETE FROM HJ_BOARD
+		WHERE P_ID = #{p_id}
+	</delete>
+
+	<!-- update -->
+<update id="update" parameterType="com.example.demo.vo.BoardVO"  >
+      update hj_board set TITLE = #{title}, DESCRIPTION = #{description}, REG_DT = now(), ANSWER = #{answer},
+		ADMIN_ANSWER = #{admin_answer} where P_ID = #{p_id}
+   </update>
+
+	<!-- ViewSelect -->
+<select id="view" parameterType="String" resultType="com.example.demo.vo.BoardVO">
+      select
+      TITLE,
+      DESCRIPTION,
+      REG_DT,
+      TEXT_OPEN,
+      ANSWER,
+      ADMIN_ANSWER,
+      P_ID
+      from hj_board where P_ID = #{p_id}
+   </select>
+
+
+
+</mapper>
