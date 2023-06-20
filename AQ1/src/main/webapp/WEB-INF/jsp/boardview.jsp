@@ -68,7 +68,7 @@ td {
 									</table>
 								</div>
 								<div style="margin-left: 1px;">
-									<button type="button" onclick="/boardlist.do">목록</button>
+									<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 									<a href="/update.do?p_id=${viewlist.p_id}">수정</a>
 									<a href="/delete.do?p_id=${viewlist.p_id}">삭제</a>
 									
