@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +44,16 @@ public class BoardController {
 		// 가져옴
 		String a = request.getParameter("title");
 		String b = request.getParameter("description");
+		String c = request.getParameter("admin_answer");
 		System.out.println(a);
 		System.out.println(b);
+		System.out.println(c);
 
 
 		// vo에 넣음
 		vo.setTitle(a);
 		vo.setDescription(b);
+		vo.setAdmin_answer(c);
 		//boardService에 insert실행(쿼리문)
 		boardService.insert(vo);
 		
@@ -75,6 +77,7 @@ public class BoardController {
 	   public ModelAndView modify(BoardVO vo, HttpServletRequest req, ModelAndView mav) throws Exception {
 	      vo.setTitle(req.getParameter("title"));
 	      vo.setDescription(req.getParameter("description"));
+	      vo.setAdmin_answer(req.getParameter("admin_answer"));
 	      vo.setTp("modify");
 	      boardService.update(vo);
 	      mav.setViewName("redirect:/boardlist.do");
@@ -82,10 +85,10 @@ public class BoardController {
 	   }
 	   @GetMapping("/update.do")
 	   public ModelAndView modify(HttpServletRequest req,BoardVO vo,ModelAndView mav) throws Exception {
+		   String id = req.getParameter("p_id"); //pid 하드코딩
+		   System.out.println(id);
+		   BoardVO mod  = boardService.view(id);
 //	      int pid = Integer.parseInt(req.getParameter("p_id"));
-	      String id = req.getParameter("p_id"); //pid 하드코딩
-	      System.out.println(id);
-	      BoardVO mod  = boardService.view(id);
 //	      int p_id = mod.getP_id();
 	      mav.addObject("tp", "modify");
 //	      mav.addObject("p_id", id); //하드코딩

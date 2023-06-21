@@ -23,21 +23,6 @@
 	<br>
 	<br>
 	 <a href="/boardlist.do">목록가기</a>
-	<br>
-	<br>
-	<br>
-	 <a href="/boardview.do">보러가기O</a>
-	<br>
-	<br>
-	<br>
-	<br>
-	<a href="/boardwrite.do">쓰기가기O</a>
-	<br>
-	<br>
-	<br>
-	<br>
-	<a href="/delete.do">삭제O</a>
-	<button type="button" onclick = '/delete.do' >삭제</button>
 	
 </body>
 </html>

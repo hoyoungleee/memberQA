@@ -68,13 +68,18 @@ td {
 		<div class="row">
 			<table class="table table-striped"
 				style="text-align: center; border: 1px solid #DDA520">
+				<br><br><br>
+				<Button type = Button></Buttom><br>
+				
+				<input type="hid den" name="p_id" id="p_id" value="${update.p_id }"></br>
+				
 				<thead>
 					<tr>
 						<th style="background-color: #eeeeee; text-align: center;">제목</th>
 						<th style="background-color: #eeeeee; text-align: center;">설명</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
 						<th style="background-color: #eeeeee; text-align: center;">답변여부</th>
-						<th style="background-color: #eeeeee; text-align: center;">개방여부</th>
+						<th style="background-color: #eeeeee; text-align: center;">ID 지워야함</th>
 					</tr>
 				</thead>
 
@@ -82,9 +87,10 @@ td {
 					<c:forEach var="k1" items="${sang1lists}">
 						<input type="hidden" name="p_id" id="p_id" value="${k1.p_id}">
 						<th><a href="/boardview.do?p_id=${k1.p_id }"> ${k1.title} </a></th>
-						<th> ${k1.description}</th>
+						<th>${k1.description}</th>
 						<th>${k1.reg_dt}</th>
 						<th>${k1.answer}</th>
+						<th>${k1.user}</th>
 						</tr>
 					</c:forEach>
 				</tbody>

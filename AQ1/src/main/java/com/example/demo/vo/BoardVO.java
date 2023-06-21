@@ -14,14 +14,15 @@ public class BoardVO {
 	private String answer;		//답변여부
 	private String admin_answer;//답변
 	private String p_id;           //일련번호 Local_ID
-	private String user;//답변
 	private String tp; // case 알지?
+	private String name;//이름 
+	private String user;//ID
+	private String lv;//계급
 	
 	
 	
 	
-	
-	
+
 	public String getUser() {
 		return user;
 	}
@@ -30,7 +31,18 @@ public class BoardVO {
 	}
 	
 	
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLv() {
+		return lv;
+	}
+	public void setLv(String lv) {
+		this.lv = lv;
+	}
 	public String getTp() {
 		return tp;
 	}

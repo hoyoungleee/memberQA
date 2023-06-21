@@ -40,7 +40,8 @@ td {
 					<div>
 						<div>
 							<form method="post">
-								<input type="hid den" name="p_id" value="${viewlist.p_id}" />
+								<input type="hid den" name="p_id" value="${viewlist.p_id}" /> 게시글 일련번호
+								<input type="hid den" name="lv" value="${viewlist.lv}" />권한(게시글 작성자 권한이라서 접속자로 바꿔야함 )
 								<div style="text-align: center;">
 									<table width="750">
 										<colgroup>
@@ -62,7 +63,7 @@ td {
 											</tr>
 											<th>답변</th>
 											<tr>
-												<td name="answer">${viewlist.answer }</td>
+												<td name="answer">${viewlist.admin_answer}</td>
 											</tr>
 										</tbody>
 									</table>

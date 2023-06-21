@@ -43,8 +43,9 @@ td {
                <div>
                   <div>
                      <form method="post" id="formWrite" >
-                     <input type="hid den" name="tp" id="tp" value="${tp }">
-                     <input type="hid den" name="p_id" id="p_id" value="${update.p_id }">
+                     <input type="hid den" name="tp" id="tp" value="${tp }"> 상태</br>
+                     <input type="hid den" name="p_id" id="p_id" value="${update.p_id }">게시글 일련번호</br>
+                     <input type="hid den" name="lv" id="lv" value="${update.lv }">권한</br>(게시글 작성자 권한이라서 접속자계정 세션으로 받아서 해야함)
                         <div style="text-align: center;">
                            <table>
                               <colgroup>
@@ -58,11 +59,15 @@ td {
                                  </tr>
                                  <th>제목</th>
                                  <tr>
-                                    <td><textarea rows="5" name="title" cols="100">${update.title }</textarea></td>
+                                    <td><textarea rows="5" name="title" cols="90">${update.title }</textarea></td>
                                  </tr>
                                  <th>내용</th>
                                  <tr>
-                                    <td><textarea rows="20" name="description" cols="100">${update.description }</textarea></td>
+                                    <td><textarea rows="10" name="description" cols="90">${update.description }</textarea></td>
+                                 </tr>
+                                 <th>답변</th>
+                                 <tr>
+                                    <td><textarea rows="10" name="admin_answer" cols="90">${update.admin_answer }</textarea></td>
                                  </tr>
                               </tbody>
                            </table>
@@ -71,7 +76,6 @@ td {
                            <button type="button" onclick="formsubmit()" >저장</button>
                            <button type="button" onclick="location.href='/boardlist.do'" >목록</button>
                            <br>
-                           광장에는 QnA 등록하면 삭제 기능이 없음
                         </div>
                      </form>
                   </div>
