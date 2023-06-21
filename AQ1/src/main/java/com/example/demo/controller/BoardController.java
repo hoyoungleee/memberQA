@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -131,21 +132,30 @@ public class BoardController {
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
 	//게시판 목록 
+//	
+//	@RequestMapping(value = "/boardlist.do")
+//	//ModelAndView 무조건 
+//	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
+//		
+//		List<BoardVO> lists = boardService.getLists();
+//		
+//		
+//		mav.addObject("sang1lists", lists);
+//		mav.setViewName("boardlist");
+//		
+//		System.out.println(lists);
+//		
+//		return mav;
+//	}
+
 	
-	@RequestMapping(value = "/boardlist.do")
-	//ModelAndView 무조건 
-	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
-		
-		List<BoardVO> lists = boardService.getLists();
-		
-		
-		mav.addObject("sang1lists", lists);
-		mav.setViewName("boardlist");
-		
-		System.out.println(lists);
-		
-		return mav;
-	}
+ 	@RequestMapping(value = "/boardlist.do", produces = "application/json;charset=UTF-8")
+ 	//json형태 
+	@ResponseBody
+	public List<BoardVO> boardList() throws Exception {
+	    List<BoardVO> lists = boardService.getLists();
+	    return lists;
+	} 
 	
 	
 	
