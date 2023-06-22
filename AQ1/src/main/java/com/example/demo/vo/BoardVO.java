@@ -19,17 +19,51 @@ public class BoardVO {
 	private String user;// ID
 	private String lv;// 계급
 	private String search;// 검색어
+	
+	
+	
+	
+	//페이지
 	private int page;// 페이지
+    private int recordPerPage;  // 페이지당 출력할 데이터 개수
+    private int pageSize;       // 화면 하단에 출력할 페이지 개수
+	
+	
+	
+	
+	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	
+	
+	
+	
+	public int getRecordPerPage() {
+		return recordPerPage;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void setRecordPerPage(int recordPerPage) {
+		this.recordPerPage = recordPerPage;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public int getPage() {
 		return page;
 	}

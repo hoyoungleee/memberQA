@@ -9,89 +9,114 @@
 
 <title>List</title>
 <style>
-.centered {
-   width: 400px;
-   position: absolute;
-   left: 50%;
-   margin-left: -200px;
-}
+   .centered {
+      width: 400px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+   }
 
-td {
-   border: 1px solid #DDA520;
-}
+   .container {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
 
-.container {
-   font-family: arial;
-   font-size: 24px;
-   margin: 25px;
-   width: 200px;
-   height: 200px;
-}
+   h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 0;
+   }
+
+   table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+   }
+
+   th,
+   td {
+      border: 1px solid #DDA520;
+      padding: 10px;
+      text-align: left;
+   }
+
+   th {
+      background-color: #f9f9f9;
+   }
+
+   button {
+      border: none;
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 3px;
+      margin-right: 5px;
+   }
+
+   textarea {
+      width: 100%;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #DDA520;
+   }
+
 </style>
+
+<script type="text/javascript">
+   function formsubmit() {
+      if ($("#tp").val() == "write") {
+         $("#formWrite").attr("action", "/write.do").submit();
+      } else {
+         $("#formWrite").attr("action", "/updateaction.do").submit();
+      }
+   }
+</script>
 </head>
 <body>
    <div class="centered">
-      <div style="margin-bottom: 20px; margin-left: 1px;">
-         <div>
-            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상세
-               페이지</h1>
-         </div>
-      </div>
       <div class="container">
-         <div style="margin-left: -200px;">
-            <div>
+         <div>
+            <h1>상세 페이지</h1>
+         </div>
+         <div>
+            <form method="post" id="formWrite">
+               <input type="hid den" name="tp" id="tp" value="${tp}"> 상태</br>
+               <input type="hid den" name="p_id" id="p_id" value="${update.p_id}">게시글 일련번호</br>
+               <input type="hid den" name="lv" id="lv" value="${update.lv}">권한</br>(게시글 작성자 권한이라서 접속자계정 세션으로 받아서 해야함)
                <div>
-                  <div>
-                     <form method="post" id="formWrite" >
-                     <input type="hid den" name="tp" id="tp" value="${tp }"> 상태</br>
-                     <input type="hid den" name="p_id" id="p_id" value="${update.p_id }">게시글 일련번호</br>
-                     <input type="hid den" name="lv" id="lv" value="${update.lv }">권한</br>(게시글 작성자 권한이라서 접속자계정 세션으로 받아서 해야함)
-                        <div style="text-align: center;">
-                           <table>
-                              <colgroup>
-                                 <col width="250px" />
-                                 <col />
-                              </colgroup>
-                              <tbody>
-                                 <th>작성자</th>
-                                 <tr>
-                                    <td>asd</td>
-                                 </tr>
-                                 <th>제목</th>
-                                 <tr>
-                                    <td><textarea rows="5" name="title" cols="90">${update.title }</textarea></td>
-                                 </tr>
-                                 <th>내용</th>
-                                 <tr>
-                                    <td><textarea rows="10" name="description" cols="90">${update.description }</textarea></td>
-                                 </tr>
-                                 <th>답변</th>
-                                 <tr>
-                                    <td><textarea rows="10" name="admin_answer" cols="90">${update.admin_answer }</textarea></td>
-                                 </tr>
-                              </tbody>
-                           </table>
-                        </div>
-                        <div style="margin-left: 1px;">
-                           <button type="button" onclick="formsubmit()" >저장</button>
-                           <button type="button" onclick="location.href='/boardlist.do'" >목록</button>
-                           <br>
-                        </div>
-                     </form>
-                  </div>
+                  <table>
+                     <tr>
+                        <th>작성자</th>
+                        <td>${update.user}</td>
+                     </tr>
+                     <tr>
+                        <th>제목</th>
+                        <td><textarea rows="5" name="title" cols="90">${update.title}</textarea></td>
+                     </tr>
+                     <tr>
+                        <th>내용</th>
+                        <td><textarea rows="10" name="description" cols="90">${update.description}</textarea></td>
+                     </tr>
+                     <tr>
+                        <th>답변</th>
+                        <td><textarea rows="10" name="admin_answer" cols="90">${update.admin_answer}</textarea></td>
+                     </tr>
+                  </table>
                </div>
-            </div>
+               <div>
+                  <button type="button" onclick="formsubmit()">저장</button>
+                  <button type="button" onclick="location.href='/boardlist.do'">목록</button>
+                  <br>
+               </div>
+            </form>
          </div>
       </div>
    </div>
 </body>
-<script type="text/javascript">
-function formsubmit(){
-    if($("#tp").val() == "write"){
-       $("#formWrite").attr("action", "/write.do").submit();
-    }else{
-       $("#formWrite").attr("action","/updateaction.do").submit();
-    }
-}
-</script>
+
 </html>

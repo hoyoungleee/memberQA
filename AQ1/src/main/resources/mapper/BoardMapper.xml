@@ -30,6 +30,7 @@
 		LIMIT #{page}, 10
 		</if>
 		
+		
 	</select>
 
 	<!-- insert -->

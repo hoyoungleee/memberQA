@@ -58,6 +58,7 @@ public class BoardController {
 		//boardService에 insert실행(쿼리문)
 		boardService.insert(vo);
 		
+		//mav.setViewName("redirect:/boardlist.do");
 		mav.setViewName("redirect:/boardlist.do");
 		
 		return mav;
@@ -81,7 +82,9 @@ public class BoardController {
 	      vo.setAdmin_answer(req.getParameter("admin_answer"));
 	      vo.setTp("modify");
 	      boardService.update(vo);
-	      mav.setViewName("redirect:/boardlist.do");
+	      //mav.setViewName("redirect:/boardlist.do");
+	      mav.setViewName("redirect:/boardview.do?p_id=" + vo.getP_id());
+
 	      return mav;
 	   }
 	   @GetMapping("/update.do")
@@ -146,15 +149,18 @@ public class BoardController {
 		return mav;
 	}
 
-	
+	//Ajax 추가
  	@RequestMapping(value = "/boardAjax.do", produces = "application/json;charset=UTF-8")
  	//json형태 
 	@ResponseBody
 	public List<BoardVO> boardList(HttpServletRequest request) throws Exception {
-
+ 		
+ 		//검색파라미터 
 		String search = request.getParameter("search");
+		//페이지
 		int page = Integer.parseInt(request.getParameter("page"));
 		
+		//값 전달
 		BoardVO vo = new BoardVO();
 		vo.setSearch(search);
 		vo.setPage(page);
@@ -170,45 +176,45 @@ public class BoardController {
 	
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
 	
-	//상세보기 
+//	//상세보기 
+//	
+//	  @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
+//	  @ResponseBody
+//	  ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
+//		  
+//		  
+//		return mav;
+//	}
+//	
+//	
+////ajax	
+//	  @RequestMapping(value = "/viewAjax.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+//	  @ResponseBody
+//	  public BoardVO boardView(HttpServletRequest request) throws Exception {
+//	      String p_id = request.getParameter("p_id");
+//	      BoardVO views = boardService.view(p_id);
+//	      return views;
+//	  }
 	
-	@RequestMapping(value = "/boardview.do")
-	//ModelAndView 무조건 
-	public ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{
-		String p_id = request.getParameter("p_id");
-
-		   BoardVO views = boardService.view(p_id);
-
-		   mav.addObject("viewlist", views);
-
-		   mav.setViewName("boardview");
+	
+		//mvc 
 		
+	  @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
+	  @ResponseBody
+	  ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
+		  
+		  
+		  //MVC 
+		  String p_id = request.getParameter("p_id");
+	  
+	  BoardVO views = boardService.view(p_id);
+	  
+	  mav.addObject("viewlist", views);
+	  
+	  mav.setViewName("boardview");
+
 		return mav;
 	}
-	
-	
-	
-	
-//	@RequestMapping(value = "/boardview.do", method = RequestMethod.GET)
-//	   public ModelAndView view(ModelAndView mav, HttpServletRequest req) throws Exception{
-//	      //p_id가 String일때
-//		 int pid = Integer.parseInt(req.getParameter("p_id"));
-//		   // int id = 2;
-//		   BoardVO view = boardService.view(pid);
-//		   mav.addObject("view", view);
-//		   
-//		   mav.setViewName("boardview");
-//		   
-//		   return mav;
-//	   }
-//	
-	
-
-	
-	
-	
-	
-	
 	
 	
 	
