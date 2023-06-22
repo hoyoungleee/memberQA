@@ -14,7 +14,7 @@ public interface BoardService {
 	/* public List<MemberVO> getLists() throws Exception; */
 	
 	//ListSelect		
-	public List<BoardVO> getLists() throws Exception;
+	public List<BoardVO> getLists(BoardVO vo) throws Exception;
 	
 	//insert
 	public void insert(BoardVO vo) throws Exception;

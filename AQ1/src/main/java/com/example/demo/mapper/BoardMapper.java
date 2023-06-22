@@ -13,7 +13,7 @@ public interface BoardMapper {
 	
 	//ListSelect
 	//조건 없어서 아래와 같이 해도 상관 없음
-	public List<BoardVO> getLists() throws Exception;
+	public List<BoardVO> getLists(BoardVO vo) throws Exception;
 
 	//insert
 	public void insert(BoardVO vo) throws Exception;

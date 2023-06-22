@@ -32,10 +32,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	
 	@Override
-	public List<BoardVO> getLists() throws Exception {
+	public List<BoardVO> getLists(BoardVO vo) throws Exception {
 		
 		
-		return memberMapper.getLists();
+		return memberMapper.getLists(vo);
 		
 	}
 	

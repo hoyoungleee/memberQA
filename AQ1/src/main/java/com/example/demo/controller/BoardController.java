@@ -132,32 +132,41 @@ public class BoardController {
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
 	//게시판 목록 
-//	
-//	@RequestMapping(value = "/boardlist.do")
-//	//ModelAndView 무조건 
-//	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
-//		
+	
+	@RequestMapping(value = "/boardlist.do")
+	//ModelAndView 무조건 
+	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
+		
+		// Mvc
 //		List<BoardVO> lists = boardService.getLists();
-//		
-//		
 //		mav.addObject("sang1lists", lists);
 //		mav.setViewName("boardlist");
-//		
-//		System.out.println(lists);
-//		
-//		return mav;
-//	}
+		
+		
+		return mav;
+	}
 
 	
- 	@RequestMapping(value = "/boardlist.do", produces = "application/json;charset=UTF-8")
+ 	@RequestMapping(value = "/boardAjax.do", produces = "application/json;charset=UTF-8")
  	//json형태 
 	@ResponseBody
-	public List<BoardVO> boardList() throws Exception {
-	    List<BoardVO> lists = boardService.getLists();
+	public List<BoardVO> boardList(HttpServletRequest request) throws Exception {
+
+		String search = request.getParameter("search");
+		int page = Integer.parseInt(request.getParameter("page"));
+		
+		BoardVO vo = new BoardVO();
+		vo.setSearch(search);
+		vo.setPage(page);
+		
+	    List<BoardVO> lists = boardService.getLists(vo);
+
+		
 	    return lists;
 	} 
 	
-	
+ 	
+ 	
 	
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */	
 	

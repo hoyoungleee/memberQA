@@ -4,16 +4,33 @@
 
 
 
-	<!-- ListSelect -->
-	<select id="getLists"
+<!-- ListSelect -->
+
+
+<!-- 	<select id="getLists"
 		parameterType="com.example.demo.vo.BoardVO"
 		resultType="com.example.demo.vo.BoardVO">
 		SELECT *
-		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user;
+		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER =
+		USER.user;
+	</select>  -->
+
+<!-- 검색 LIST 쿼리 -->
+
+	<select id="getLists"
+		parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
+		SELECT *
+		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
+		<if test="search != null">
+		WHERE 1 = 1
+			AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
+		</if>
+
+		<if test="page != null">
+		LIMIT #{page}, 10
+		</if>
+		
 	</select>
-	<!-- <select id="getLists" parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO"> 
-		select title,description,reg_dt,text_open,answer,admin_answer,p_id,user FROM 
-		hj_board </select> -->
 
 	<!-- insert -->
 	<insert id="insert" parameterType="com.example.demo.vo.BoardVO">
@@ -28,13 +45,16 @@
 	<!-- delete -->
 	<delete id="delete" parameterType="com.example.demo.vo.BoardVO">
 		DELETE FROM HJ_BOARD
-		WHERE P_ID = #{p_id}
+		WHERE P_ID
+		= #{p_id}
 	</delete>
 
 	<!-- update -->
 	<update id="update" parameterType="com.example.demo.vo.BoardVO">
-		update hj_board set TITLE = #{title}, DESCRIPTION = #{description},
-		REG_DT = now(), ANSWER = #{answer},
+		update hj_board set TITLE =
+		#{title}, DESCRIPTION = #{description},
+		REG_DT = now(), ANSWER =
+		#{answer},
 		ADMIN_ANSWER = #{admin_answer}
 		where P_ID = #{p_id}
 	</update>
@@ -51,7 +71,7 @@
 		HJ_BOARD.ADMIN_ANSWER,
 		HJ_BOARD.P_ID,
 		user.user,
-		user.lv 
+		user.lv
 		from hj_board JOIN USER ON HJ_BOARD.USER = USER.user where P_ID = #{p_id}
 	</select>
 
