@@ -15,12 +15,13 @@
 </script>
 </head>
 <body>
+<%@include file="./header.jsp" %>s
 <h1>로그인을 위해 정보를 입력해주세요</h1>
 	<form id="loginInfo">
-		<input id ="id" required="required"/>
+		아이디&nbsp;&nbsp;&nbsp;&nbsp;<input id ="id" required="required"/>
 		<br>
-		<input id ="pw" required="required"/>
-		<button onclick="return checkForm()">로그인</button>
+		비밀번호&nbsp;<input id ="pw" required="required" type="password"/>
+		<button onclick="return loginForm()">로그인</button>
 	</form>
 </body>
 </html>

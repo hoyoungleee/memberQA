@@ -7,12 +7,13 @@
 <title>방문을 환영합니다.</title>
 </head>
 <body>
+<%@include file="./header.jsp" %>
 	<h1>회원제 문의게시판입니다..</h1>
 	<br>
 	<hr>
-	<strong>문의를 남기시려면 로그인을 해주시기 바랍니다.<strong><a href="/login.do">로그인하기</a>
+	<strong>문의를 남기시려면 로그인을 해주시기 바랍니다.</strong><a href="/login.do">로그인하기</a>
 	<hr>
 	<br>
-	<strong>아직 회원이 아니시라면<strong> <a href="/reg.do">회원가입하기</a>
+	<strong>아직 회원이 아니시라면</strong> <a href="/reg.do">회원가입하기</a>
 </body>
 </html>

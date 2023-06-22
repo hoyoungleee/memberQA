@@ -21,4 +21,9 @@
     <delete id="deleteMember" parameterType="com.example.demo.vo.MemberVO">
 		UPDATE member SET del_yn = 'Y' where id = #{id}
     </delete>
+     <select id="selectMember" resultType="com.example.demo.vo.MemberVO" parameterType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
+        SELECT *
+        FROM member
+        WHERE id = #{id}	<!-- SQL문 작성 -->
+    </select>
 </mapper>
