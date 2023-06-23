@@ -215,13 +215,13 @@ function form() {
 function updForm() {
 	var flag = nullCheck();
 	if (flag) {
-		updForm();
+		udtForm();
 	}
 
 }
 
 //회원수정폼값관련
-function updForm() {
+function udtForm() {
 	
 	var email = document.getElementById("email1").value + "@" + document.getElementById("email2").value;
 
