@@ -23,8 +23,6 @@ public class Qa1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Qa1Application.class, args);
 		
-		
-		
 		/*
 		  main 메서드는 애플리케이션의 주 진입점
 		  SpringApplication.run()은 Spring Boot 애플리케이션 실행

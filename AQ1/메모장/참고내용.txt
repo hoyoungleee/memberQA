@@ -1,0 +1,12 @@
+pagin 하는거
+https://sang12.co.kr/36/MYSQL-LIMIT%EB%A5%BC%EC%9D%B4%EC%9A%A9%ED%95%9C-%ED%8E%98%EC%9D%B4%EC%A7%95%28PAGING%29-%EC%BF%BC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0-with-Mybatis
+
+https://jo-coder.tistory.com/28
+
+Session
+https://byul91oh.tistory.com/227
+
+
+
+Spring Boot 게시판 참고하면서 만듬 
+https://backendcode.tistory.com/120

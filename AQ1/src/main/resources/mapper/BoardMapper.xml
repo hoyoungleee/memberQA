@@ -21,10 +21,12 @@
 		parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
 		SELECT *
 		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
+		
 		<if test="search != null">
 		WHERE 1 = 1
 			AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
 		</if>
+		ORDER BY REG_DT DESC
 
 		<if test="page != null">
 		LIMIT #{page}, 10
@@ -37,10 +39,10 @@
 	<insert id="insert" parameterType="com.example.demo.vo.BoardVO">
 		INSERT INTO HJ_BOARD (TITLE,
 		DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
-		ADMIN_ANSWER)
+		ADMIN_ANSWER,USER)
 		VALUES
-		(#{title},#{description},now(),#{text_open}, #{answer},
-		#{admin_answer})
+		(#{title},#{description},now(),#{text_open}, "N",
+		#{admin_answer}, "a")
 	</insert>
 
 	<!-- delete -->
@@ -54,9 +56,10 @@
 	<update id="update" parameterType="com.example.demo.vo.BoardVO">
 		update hj_board set TITLE =
 		#{title}, DESCRIPTION = #{description},
-		REG_DT = now(), ANSWER =
-		#{answer},
-		ADMIN_ANSWER = #{admin_answer}
+		REG_DT = now(), ADMIN_ANSWER = #{admin_answer}
+		<if test="admin_answer != null">
+		 ,ANSWER ="Y"
+		</if>
 		where P_ID = #{p_id}
 	</update>
 

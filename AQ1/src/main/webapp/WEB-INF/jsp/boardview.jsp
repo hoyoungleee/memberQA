@@ -71,8 +71,8 @@
 			</div>
 			<div>
 				<form method="post">
-					<input type="hidden" name="p_id" value="${viewlist.p_id}" /> 게시글 일련번호
-					<input type="hidden" name="lv" value="${viewlist.lv}" /> 권한(게시글 작성자 권한이라서 접속자로 바꿔야함)
+					<input type="hid den" name="p_id" value="${viewlist.p_id}" /> 게시글 일련번호
+					<input type="hid den" name="lv" value="${viewlist.lv}" /> 권한(게시글 작성자 권한이라서 접속자로 바꿔야함)
 					<div>
 						<table>
 							<tr>
@@ -89,14 +89,13 @@
 							</tr>
 							<tr>
 								<th>답변</th>
-								<td name="answer">${viewlist.admin_answer}</td>
+								<td name="answer" >${viewlist.admin_answer}</td>
 							</tr>
 						</table>
 					</div>
 					<div>
 						<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 						<a href="/update.do?p_id=${viewlist.p_id}">수정</a>
-
 						<a href="/delete.do?p_id=${viewlist.p_id}">삭제</a>
 					</div>
 				</form>

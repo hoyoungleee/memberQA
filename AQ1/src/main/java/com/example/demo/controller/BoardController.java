@@ -46,15 +46,18 @@ public class BoardController {
 		String a = request.getParameter("title");
 		String b = request.getParameter("description");
 		String c = request.getParameter("admin_answer");
+		String d = request.getParameter("user");
 		System.out.println(a);
 		System.out.println(b);
 		System.out.println(c);
+		System.out.println(d);
 
 
 		// vo에 넣음
 		vo.setTitle(a);
 		vo.setDescription(b);
 		vo.setAdmin_answer(c);
+		vo.setUser(d);
 		//boardService에 insert실행(쿼리문)
 		boardService.insert(vo);
 		
@@ -102,14 +105,7 @@ public class BoardController {
 	      return mav;
 	   }		
 		
-		
-
-
-	
-	
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-	
-	
 	
 	//delete
 	@RequestMapping(value = "/delete.do", method = {RequestMethod.GET,RequestMethod.POST})
@@ -127,27 +123,36 @@ public class BoardController {
 		
 		mav.setViewName("redirect:/boardlist.do");
 	    return mav;
-		
- 
 	}
 	
-
 	/*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 	
 	//게시판 목록 
 	
-	@RequestMapping(value = "/boardlist.do")
-	//ModelAndView 무조건 
-	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
-		
-		// Mvc
+	//
+//	@RequestMapping(value = "/boardlist.do")
+//	//ModelAndView 무조건 
+//	public ModelAndView list(BoardVO vo,ModelAndView mav) throws Exception{
+//		
+//		
 //		List<BoardVO> lists = boardService.getLists();
 //		mav.addObject("sang1lists", lists);
 //		mav.setViewName("boardlist");
-		
-		
+//		
+//		
+//		return mav;
+//	}
+	
+	//페이지 이동하는거 하나 필요하고 
+	// json list로 뿌려주는 거 하나 
+
+	
+	// 페이지 이동
+	@GetMapping("/boardlist.do")
+	public ModelAndView list(ModelAndView mav) {
 		return mav;
 	}
+	
 
 	//Ajax 추가
  	@RequestMapping(value = "/boardAjax.do", produces = "application/json;charset=UTF-8")
