@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원제 QA 게시판</title>
+<title>Insert title here</title>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" >
 <!-- JavaScript Bundle with Popper -->
@@ -25,22 +25,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 </head>
 <body>
-	<header>
-	<c:if test="${sessionScope.id == null }">
-		<div id="notLogin">
-			<a href="/">홈버튼</a>
-			<a href="/reg.do">회원가입</a>
-			<a href="/login.do"><button>로그인</button></a>
-		</div>
-	</c:if>
-	<c:if test="${sessionScope.id != null }">
-		<div id="Login">
-			<a href="/">홈버튼</a>
-			<a href="/update.do">회원정보수정</a>
-			<a hidden="/delete.do">탈퇴하기</a>
-			<a href="logout.do"><button>로그아웃</button></a>
-		</div>
-	</c:if>
-	</header>
+<%@include file="./header.jsp" %>
+<c:if test="${sessionScope.id == null }">
+	<h1>로그인 후 이용하세요.</h1>
+</c:if>
+<c:if test="${sessionScope.id != null }">
+	<h1>탈퇴를 하시려면 비밀번호를 한번 더 입력해주세요.</h1>
+	<input type="hidden" value="${sessionScope.id}">
+	<input type="password" id="pw"/> 
+	<button>탈퇴하기</button>
+</c:if>
 </body>
 </html>

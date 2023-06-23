@@ -1,16 +1,10 @@
 package com.example.demo.controller;
 
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-import org.checkerframework.checker.units.qual.m;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.serviceImpl.MemberServiceImpl;
@@ -49,6 +43,19 @@ public class MemberController {
 		
 		model.addAttribute("member",member);
 		
+		if(member != null) {
+		String email = member.getEmail();
+		
+		int middleIndex = email.indexOf("@");
+		int lastIndex = email.length();
+		
+		String email1 = email.substring(0,middleIndex);
+		String email2 = email.substring(middleIndex+1,lastIndex);
+		
+		model.addAttribute("email1", email1);
+		model.addAttribute("email2", email2);
+		}
+		
 		return "udtMember";
 	}
 
@@ -79,11 +86,13 @@ public class MemberController {
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
 		String address = request.getParameter("address");
+		String dtlAddress = request.getParameter("dtlAddress");
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		
 		memberVO.setId(id);
 		memberVO.setAddress(address);
+		memberVO.setDtlAddress(dtlAddress);
 		memberVO.setBirth(birth);
 		memberVO.setEmail(email);
 		memberVO.setGender(gender);
@@ -94,5 +103,37 @@ public class MemberController {
 		int result = memberServiceImpl.joinMember(memberVO);
 		return result;
 	}
+	@PostMapping("/udtForm.do")
+	@ResponseBody
+	public int udtMember(HttpServletRequest request) {
+
+		MemberVO memberVO = new MemberVO();
+		
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		String name = request.getParameter("name");
+		String birth = request.getParameter("birth");
+		String address = request.getParameter("address");
+		String dtlAddress = request.getParameter("dtlAddress");
+		String gender = request.getParameter("gender");
+		String email = request.getParameter("email");
+		
+		System.out.println(id+pw+ name+ birth+ address+dtlAddress+gender+email);
+		
+		memberVO.setId(id);
+		memberVO.setPw(pw);
+		memberVO.setAddress(address);
+		memberVO.setDtlAddress(dtlAddress);
+		memberVO.setBirth(birth);
+		memberVO.setEmail(email);
+		memberVO.setGender(gender);
+		memberVO.setName(name);
+		
+		
+		int result = memberServiceImpl.updateMember(memberVO);
+		return result;
+	}
+	
+	
 
 }

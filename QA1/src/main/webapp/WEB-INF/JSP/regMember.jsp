@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@include file="./header.jsp" %>
-<h1 id="formFlag">회원가입을 위해 정보를 입력하세요.</h1>
+<h1 >회원가입을 위해 정보를 입력하세요.</h1>
 	<form name="member_info" id="member_info" onchange="btn()" onkeyup="btn()">
 		<h2>아이디</h2>
 		<br>
@@ -37,7 +37,7 @@
 		<br>
 		<h2>주소입력</h2>
 		<br>
-		<input onchange="btn()" type="text" id="address1" name="address" placeholder="주소검색 버튼클릭바람" readonly="readonly" >
+		<input onchange="btn()" type="text" id="address" name="address" placeholder="주소검색 버튼클릭바람" readonly="readonly" >
 		<input onchange="btn()" type="button" onclick="addrSearch()" value="주소 검색"><br>
 		<input onchange="btn()" type="text" id="dtlAddress" name="dtlAddress" required="required" placeholder="상세주소 입력하기"/>
 		<br>
@@ -62,7 +62,7 @@
             </select>
         </div>
 		<br>
-		<input type="button" id="joinBtn"  onclick="return nullCheck()" value ="회원가입신청"/>
+		<input type="button" id="btn"  onclick="return regForm()" value ="회원가입신청"/>
 	</form>
 </body>
 </html>
