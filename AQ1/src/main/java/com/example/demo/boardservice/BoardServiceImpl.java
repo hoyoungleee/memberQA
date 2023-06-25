@@ -11,39 +11,51 @@ import com.example.demo.vo.BoardVO;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	@Autowired 
-	private BoardMapper memberMapper; // BoardMapper의 의존성 주입
+   @Autowired 
+   private BoardMapper memberMapper; // BoardMapper의 의존성 주입
 
-	
-	@Override
-	public void insert(BoardVO vo) throws Exception {
-		memberMapper.insert(vo);
-	}
+   
+   @Override
+   public void insert(BoardVO vo) throws Exception {
+      memberMapper.insert(vo);
+   }
 
-	@Override
-	   public void update(BoardVO vo) throws Exception{
-		memberMapper.update(vo);
-	   }
-	
-	@Override
-	public void delete(BoardVO vo) throws Exception {
-		memberMapper.delete(vo);
-	}
-	
-	
-	@Override
-	public List<BoardVO> getLists(BoardVO vo) throws Exception {
-		
-		
-		return memberMapper.getLists(vo);
-		
-	}
-	
-	
-	@Override
-	public BoardVO view(String id) throws Exception {
-		return memberMapper.view(id);
-	}
-	
-	
+   @Override
+      public void update(BoardVO vo) throws Exception{
+      memberMapper.update(vo);
+      }
+   
+   @Override
+   public void delete(BoardVO vo) throws Exception {
+      memberMapper.delete(vo);
+   }
+   
+   
+   @Override
+   public List<BoardVO> getLists(BoardVO vo) throws Exception {
+      
+      
+      return memberMapper.getLists(vo);
+      
+   }
+   
+   
+   @Override
+   public BoardVO view(String id) throws Exception {
+      return memberMapper.view(id);
+   }
+   
+
+   
+   
+   @Override
+   public int count() throws Exception {
+      int count = memberMapper.count();
+      BoardVO vo = new BoardVO();
+      vo.setCnt(count);
+      System.out.println(vo.getCnt());
+      return count;
+      
+   }
+   
 }

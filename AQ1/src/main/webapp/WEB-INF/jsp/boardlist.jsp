@@ -159,14 +159,14 @@ body {
 	});
 	function loadBoardData(page) {
 		$.ajax({
-			url: "/boardAjax.do",
-			data: {
-				'search': $('#search').val(),
-				'page': ((page * 10) - 10),
+			url : "/boardAjax.do",
+			data : {
+				'search' : $('#search').val(),
+				'page' : ((page * 10) - 10),
 			},
-			type: "get",
-			dataType: "json",
-			success: function(data) {
+			type : "get",
+			dataType : "json",
+			success : function(data) {
 				$("#AjaxBoard").empty();
 				$.each(data, function(index, obj) {
 					var count = 0;
@@ -175,18 +175,17 @@ body {
 					// answer 값에 따라 클래스를 동적으로 지정
 					var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
 
-					var html = "<tr>" +
-						"<td><a href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>" +
-						"<td>" + obj.description + "</td>" +
-						"<td>" + obj.reg_dt + "</td>" +
-						"<td class='" + answerClass + "'>" + answer + "</td>" +
-						"<td>" + obj.p_id + "</td>" +
-						"<td>" + obj.user + "</td>" +
-						"</tr>";
+					var html = "<tr>" + "<td><a href='/boardview.do?p_id="
+							+ obj.p_id + "'>" + obj.title + "</a></td>"
+							+ "<td>" + obj.description + "</td>" + "<td>"
+							+ obj.reg_dt + "</td>"
+							+ "<td class='" + answerClass + "'>" + answer
+							+ "</td>" + "<td>" + obj.p_id + "</td>" + "<td>"
+							+ obj.user + "</td>" + "</tr>";
 					$("#AjaxBoard").append(html);
 				});
 			},
-			error: function() {
+			error : function() {
 				alert("Error");
 			}
 		});
@@ -196,35 +195,65 @@ body {
 <title>List</title>
 </head>
 <body>
-	<div class="container">
-		<div class="button-group">
+		<!-- <div class="button-group">
 			<button onclick="loadBoardData(1)">1</button>
 			<button onclick="loadBoardData(2)">2</button>
 			<button onclick="loadBoardData(3)">3</button>
-				<button onclick="loadBoardData(4)">4</button>
+			<button onclick="loadBoardData(4)">4</button>
 		</div>
+ -->
 
-		<div class="search-group">
-			<input type="text" id="search" name='search'
-				onkeyup="if(window.event.keyCode==13){loadBoardData();}"
-				placeholder="검색어를 입력하세요">
-			<button type="button" onclick="javascript: loadBoardData(1);">검색</button>
-		</div>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th>제목</th>
-					<th>설명</th>
-					<th>작성일</th>
-					<th>답변여부</th>
-					<th>ID</th>
-				</tr>
-			</thead>
-			<tbody id="AjaxBoard">
-			</tbody>
-		</table>
+		<div class="container">
+			<div class="button-group"></div>
 
-		<a href="/boardwrite.do" class="add-button">글쓰기</a>
-	</div>
+			<div class="search-group">
+				<input type="text" id="search" name='search'onkeyup="if(window.event.keyCode==13){loadBoardData(1);}" placeholder="검색어를 입력하세요">
+				<button type="button" onclick="javascript: loadBoardData(1);">검색</button>
+			</div>
+			<input type="hid den" name="cnt" value="${cnt}" />
+			<table class="table">
+				<thead>
+					<tr>
+						<th>제목</th>
+						<th>설명</th>
+						<th>작성일</th>
+						<th>답변여부</th>
+						<th>ID</th>
+					</tr>
+				</thead>
+				<tbody id="AjaxBoard">
+				</tbody>
+			</table>
+
+			<a href="/boardwrite.do" class="add-button">글쓰기</a>
+		</div> 
+</body>
+
+
+<script type="text/javascript">
+
+function createPageButtons(totalPages) {
+	var buttonGroup = $(".button-group");
+	buttonGroup.empty();
+
+	for (var i = 1; i <= totalPages; i++) {
+		var button = $("<button>").text(i);
+		button.click(function() {
+			var page = $(this).text();
+			loadBoardData(page);
+			buttonGroup.find("button").removeClass("active");
+			$(this).addClass("active");
+		});
+		buttonGroup.append(button);
+	}
+}
+
+// 페이지 버튼 생성
+var cnt = ${cnt}; // 게시글 수
+var pageSize = 10; // 페이지당 보여줄 개수
+var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
+createPageButtons(totalPages);
+
+</script>
 </html>

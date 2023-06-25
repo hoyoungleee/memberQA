@@ -7,77 +7,77 @@
 <!-- ListSelect -->
 
 
-<!-- 	<select id="getLists"
-		parameterType="com.example.demo.vo.BoardVO"
-		resultType="com.example.demo.vo.BoardVO">
-		SELECT *
-		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER =
-		USER.user;
-	</select>  -->
+<!--    <select id="getLists"
+      parameterType="com.example.demo.vo.BoardVO"
+      resultType="com.example.demo.vo.BoardVO">
+      SELECT *
+      FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER =
+      USER.user;
+   </select>  -->
 
 <!-- 검색 LIST 쿼리 -->
 
-	<select id="getLists"
-		parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
-		SELECT *
-		FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
-		
-		<if test="search != null">
-		WHERE 1 = 1
-			AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
-		</if>
-		ORDER BY REG_DT DESC
+   <select id="getLists"
+      parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
+      SELECT *
+      FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
+      <if test="search != null">
+      WHERE 1 = 1
+         AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
+      </if>
+      <if test="page != null">
+      LIMIT #{page}, 10
+      </if>
+   </select>
+   
+   
+   
+   <select id="count" resultType="int">
+ SELECT COUNT(HJ_BOARD.P_ID) as CNT
+      FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
+   </select>
 
-		<if test="page != null">
-		LIMIT #{page}, 10
-		</if>
-		
-		
-	</select>
+   <!-- insert -->
+   <insert id="insert" parameterType="com.example.demo.vo.BoardVO">
+      INSERT INTO HJ_BOARD (TITLE,
+      DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
+      ADMIN_ANSWER)
+      VALUES
+      (#{title},#{description},now(),'Y', #{answer},'N')
+   </insert>
 
-	<!-- insert -->
-	<insert id="insert" parameterType="com.example.demo.vo.BoardVO">
-		INSERT INTO HJ_BOARD (TITLE,
-		DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
-		ADMIN_ANSWER,USER)
-		VALUES
-		(#{title},#{description},now(),#{text_open}, "N",
-		#{admin_answer}, "a")
-	</insert>
+   <!-- delete -->
+   <delete id="delete" parameterType="com.example.demo.vo.BoardVO">
+      DELETE FROM HJ_BOARD
+      WHERE P_ID
+      = #{p_id}
+   </delete>
 
-	<!-- delete -->
-	<delete id="delete" parameterType="com.example.demo.vo.BoardVO">
-		DELETE FROM HJ_BOARD
-		WHERE P_ID
-		= #{p_id}
-	</delete>
+   <!-- update -->
+   <update id="update" parameterType="com.example.demo.vo.BoardVO">
+      update hj_board set TITLE =
+      #{title}, DESCRIPTION = #{description},
+      REG_DT = now(), ANSWER =
+      #{answer},
+      ADMIN_ANSWER = #{admin_answer}
+      where P_ID = #{p_id}
+   </update>
 
-	<!-- update -->
-	<update id="update" parameterType="com.example.demo.vo.BoardVO">
-		update hj_board set TITLE =
-		#{title}, DESCRIPTION = #{description},
-		REG_DT = now(), ADMIN_ANSWER = #{admin_answer}
-		<if test="admin_answer != null">
-		 ,ANSWER ="Y"
-		</if>
-		where P_ID = #{p_id}
-	</update>
-
-	<!-- ViewSelect -->
-	<select id="view" parameterType="String"
-		resultType="com.example.demo.vo.BoardVO">
-		select
-		HJ_BOARD.TITLE,
-		HJ_BOARD.DESCRIPTION,
-		HJ_BOARD.REG_DT,
-		HJ_BOARD.TEXT_OPEN,
-		HJ_BOARD.ANSWER,
-		HJ_BOARD.ADMIN_ANSWER,
-		HJ_BOARD.P_ID,
-		user.user,
-		user.lv
-		from hj_board JOIN USER ON HJ_BOARD.USER = USER.user where P_ID = #{p_id}
-	</select>
+   <!-- ViewSelect -->
+   <select id="view" parameterType="String"
+      resultType="com.example.demo.vo.BoardVO">
+      select
+      HJ_BOARD.TITLE,
+      HJ_BOARD.DESCRIPTION,
+      HJ_BOARD.REG_DT,
+      HJ_BOARD.TEXT_OPEN,
+      HJ_BOARD.ANSWER,
+      HJ_BOARD.ADMIN_ANSWER,
+      HJ_BOARD.P_ID,
+      user.user,
+      user.lv
+      from hj_board JOIN USER ON HJ_BOARD.USER = USER.user where P_ID = #{p_id}
+   </select>
 
 
 
