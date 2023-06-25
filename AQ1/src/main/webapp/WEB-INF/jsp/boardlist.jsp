@@ -195,7 +195,9 @@ body {
 <title>List</title>
 </head>
 <body>
-		<!-- <div class="button-group">
+		<!--
+		
+		 <div class="button-group">
 			<button onclick="loadBoardData(1)">1</button>
 			<button onclick="loadBoardData(2)">2</button>
 			<button onclick="loadBoardData(3)">3</button>
@@ -232,21 +234,21 @@ body {
 
 
 <script type="text/javascript">
+/* 페이징 처리 주석  */
+for (var i = 1; i <= totalPages; i++) {
+	var button = $("<button>").text(i); // 새로운 버튼 엘리먼트 생성하고 텍스트로 현재 페이지 번호 설정
 
-function createPageButtons(totalPages) {
-	var buttonGroup = $(".button-group");
-	buttonGroup.empty();
+	button.click(function() {
+		var page = $(this).text(); // 클릭된 버튼의 텍스트인 페이지 번호 저장
+		loadBoardData(page); // 해당 페이지의 데이터를 불러오기 위해 loadBoardData 함수 호출
 
-	for (var i = 1; i <= totalPages; i++) {
-		var button = $("<button>").text(i);
-		button.click(function() {
-			var page = $(this).text();
-			loadBoardData(page);
-			buttonGroup.find("button").removeClass("active");
-			$(this).addClass("active");
-		});
-		buttonGroup.append(button);
-	}
+		buttonGroup.find("button").removeClass("active"); // 버튼 그룹 내의 모든 버튼에서 active 클래스 제거
+		$(this).addClass("active"); // 클릭된 버튼에 active 클래스 추가하여 활성화 상태로 표시
+	});
+
+	buttonGroup.append(button); // 버튼을 버튼 그룹에 추가
+}
+
 }
 
 // 페이지 버튼 생성

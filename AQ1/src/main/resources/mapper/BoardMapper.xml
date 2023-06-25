@@ -2,32 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.BoardMapper">
 
-
-
-<!-- ListSelect -->
-
-
-<!--    <select id="getLists"
-      parameterType="com.example.demo.vo.BoardVO"
-      resultType="com.example.demo.vo.BoardVO">
-      SELECT *
-      FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER =
-      USER.user;
-   </select>  -->
-
 <!-- 검색 LIST 쿼리 -->
 
    <select id="getLists"
       parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
       SELECT *
       FROM HJ_BOARD JOIN USER ON HJ_BOARD.USER = USER.user
-      <if test="search != null">
       WHERE 1 = 1
+      <if test="search != null">
          AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
       </if>
+      ORDER BY HJ_BOARD.REG_DT DESC
       <if test="page != null">
       LIMIT #{page}, 10
       </if>
+      
    </select>
    
    
@@ -39,11 +28,12 @@
 
    <!-- insert -->
    <insert id="insert" parameterType="com.example.demo.vo.BoardVO">
-      INSERT INTO HJ_BOARD (TITLE,
+      INSERT INTO HJ_BOARD (TITLE,user,
       DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
       ADMIN_ANSWER)
       VALUES
-      (#{title},#{description},now(),'Y', #{answer},'N')
+      (#{title},'a',#{description},now(),#{text_open}, #{answer},
+      #{admin_answer})
    </insert>
 
    <!-- delete -->
