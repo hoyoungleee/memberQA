@@ -150,6 +150,7 @@ public class BoardController {
    // 페이지 이동
    @GetMapping("/boardlist.do")
    public ModelAndView list( BoardVO vo,ModelAndView mav) throws Exception {
+	   //페이징
       int cnt =  boardService.count();
       mav.addObject("cnt", cnt);
       mav.setViewName("boardlist");
@@ -174,7 +175,6 @@ public class BoardController {
       //값 전달
       BoardVO vo = new BoardVO();
       vo.setSearch(search);
-      vo.setPage(page);
       vo.setPage(page);
       
        List<BoardVO> lists = boardService.getLists(vo);
@@ -216,8 +216,8 @@ public class BoardController {
      ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
         
         
-     //MVC 
-     String p_id = request.getParameter("p_id");
+        //MVC 
+        String p_id = request.getParameter("p_id");
      
      BoardVO views = boardService.view(p_id);
      

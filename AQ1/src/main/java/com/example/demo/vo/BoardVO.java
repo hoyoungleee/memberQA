@@ -30,7 +30,6 @@ public class BoardVO {
     
     
     
-    
     //페이징 추가 
     private int pageable;      
     private int pagenumber;    
