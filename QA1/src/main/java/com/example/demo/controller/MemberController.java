@@ -110,7 +110,6 @@ public class MemberController {
 		MemberVO memberVO = new MemberVO();
 		
 		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
 		String birth = request.getParameter("birth");
 		String address = request.getParameter("address");
@@ -118,10 +117,8 @@ public class MemberController {
 		String gender = request.getParameter("gender");
 		String email = request.getParameter("email");
 		
-		System.out.println(id+pw+ name+ birth+ address+dtlAddress+gender+email);
 		
 		memberVO.setId(id);
-		memberVO.setPw(pw);
 		memberVO.setAddress(address);
 		memberVO.setDtlAddress(dtlAddress);
 		memberVO.setBirth(birth);
@@ -134,6 +131,24 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping("/delete.do")
+	public String delMember() {
+		return "deleteMember";
+	}
 	
+	@PostMapping("/deleteMember.do")
+	@ResponseBody
+	public int deleteMember(HttpServletRequest request) {
+
+		MemberVO memberVO = new MemberVO();
+		
+		String id = request.getParameter("id");
+		
+		
+		memberVO.setId(id);
+		
+		int result = memberServiceImpl.deleteMember(memberVO);
+		return result;
+	}
 
 }

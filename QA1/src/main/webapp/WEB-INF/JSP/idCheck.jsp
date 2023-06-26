@@ -5,9 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="../common/member.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" ></script>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" ></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>Insert title here</title>
 </head>
 <body>

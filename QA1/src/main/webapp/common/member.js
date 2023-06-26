@@ -285,10 +285,33 @@ function loginForm() {
 					alert("로그인 성공! 환영합니다.");
 				}
 				else {
-					alert("저장된 회원정보가 없습니다.");
+					alert("회원정보가 맞지않습니다.");
 				}
 			}
 		});
 		return false;
 	}
+}
+
+function delMember(){
+	
+	var id = document.getElementById("id").value;
+	
+	$.ajax({
+			anyne: true,
+			type: "POST",
+			url: "/deleteMember.do" + "?id=" + id,
+			contnetType: 'text',
+			dataType: "text",
+			success: function(result) {
+				if (result == "1") {
+					alert("회원 탈퇴 성공. 홈으로 이동합니다.");
+					location.replace("/");
+				}
+				else {
+					alert("탈퇴에 실패함");
+				}
+			}
+		});
+		return false;
 }

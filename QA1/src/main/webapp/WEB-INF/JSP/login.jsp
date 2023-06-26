@@ -22,6 +22,7 @@
 		<br>
 		비밀번호&nbsp;<input id ="pw" required="required" type="password"/>
 		<button onclick="return loginForm()">로그인</button>
+		<br>
 	</form>
 </body>
 </html>

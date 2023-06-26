@@ -39,18 +39,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateMember(MemberVO memberVO) {
 		
-		SHA256 sha256 = new SHA256();
-		
-		String lawPw = memberVO.getPw();
-		
-		try {
-			String cryptogram = sha256.encrypt(lawPw);
-			memberVO.setPw(cryptogram);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		int result = mapper.updateMember(memberVO);		
 		return result;
 		

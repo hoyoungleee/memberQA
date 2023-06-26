@@ -4,7 +4,7 @@
     <select id="getLoginCheck" resultType="int" parameterType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
         SELECT count(*)
         FROM member
-        WHERE id = #{id} AND pw = #{pw}	<!-- SQL문 작성 -->
+        WHERE id = #{id} AND pw = #{pw}	AND del_yn='N'<!-- SQL문 작성 -->
     </select>
     <select id="getIdCheck" resultType="int" parameterType="com.example.demo.vo.MemberVO">	<!-- id: mapper 인터페이스에서 선언한 메서드 이름과 같아야 한다. resultType: VO 클래스가 위치하는 경로 -->
         SELECT count(*)
@@ -16,7 +16,7 @@
     	INSERT INTO member(id,pw,name,birth,gender,address,dtlAddress,email,auth, del_yn, regdate) VALUE (#{id},#{pw},#{name},#{birth},#{gender},#{address},#{dtlAddress},#{email},'2', 'N', SYSDATE());
     </insert>
     <update id="updateMember"  parameterType="com.example.demo.vo.MemberVO">
-    	UPDATE member SET name = #{name}, pw = #{pw}, birth = #{birth}, gender = #{gender}, address = #{address}, dtlAddress = #{dtlAddress}, email = #{email} WHERE id = #{id}
+    	UPDATE member SET name = #{name}, birth = #{birth}, gender = #{gender}, address = #{address}, dtlAddress = #{dtlAddress}, email = #{email} WHERE id = #{id}
     </update>
     <delete id="deleteMember" parameterType="com.example.demo.vo.MemberVO">
 		UPDATE member SET del_yn = 'Y' where id = #{id}

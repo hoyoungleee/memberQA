@@ -37,7 +37,7 @@
 		<div id="Login">
 			<a href="/">홈버튼</a>
 			<a href="/update.do">회원정보수정</a>
-			<a hidden="/delete.do">탈퇴하기</a>
+			<a href="/delete.do">탈퇴하기</a>
 			<a href="logout.do"><button>로그아웃</button></a>
 		</div>
 	</c:if>

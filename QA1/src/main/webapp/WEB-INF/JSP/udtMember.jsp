@@ -10,26 +10,29 @@
 <%@include file="./header.jsp" %>
 <c:if test="${sessionScope.id == null }">
 <h1>로그인 후 이용하세요.</h1>
+<a href="/login.do">로그인하기</a>
+<br>
+<a href="/">홈으로</a>
 </c:if>
 <c:if test="${sessionScope.id != null }">
 <h1 >정보수정을 위해 새롭게 입력하세요.</h1>
 	<form name="update_info" id="update_info"  >
 		 <h2>아이디</h2>
-		<input value="${member.id}" id="id" name="id" readonly="readonly" >
+		<input value="${member.id}" id="id" name="id" readonly="readonly" style="background-color: lightgray;" >
 		<br>
 		<br>
 		<h2>이름</h2>
 		<br>
 		<input value="${member.name}" required="required" id="name" name="name" type="text"  >
 		<br>
-		<h2>수정할 비밀번호</h2>
+<!-- 		<h2>수정할 비밀번호</h2>
 		<br>
 		<input required="required" id="pw" name="pw" type="password" placeholder="새롭게 입력해주세요.">
 		<br>
 		<h2>비밀번호 확인</h2>
 		<br>
 		<input required="required" id="confirmPw" name="confirmPw" type="password" placeholder="새롭게 입력해주세요." onkeyup="passCheck()">
-		<p id ="passStatus"></p>
+		<p id ="passStatus"></p> -->
 		<br>
 		<h2>생년월일</h2>
 		<input value="${member.birth}" required="required" id="birth" name="birth" type="date" >
