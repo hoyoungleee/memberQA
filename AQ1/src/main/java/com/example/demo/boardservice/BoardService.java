@@ -33,4 +33,4 @@ public interface BoardService {
    public int count() throws Exception;
    
 
-}
+} 
