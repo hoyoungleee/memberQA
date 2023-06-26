@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>List</title>
+<%@include file="./header.jsp" %>
 <style>
 	.centered {
 		width: 400px;
@@ -95,8 +96,8 @@
 					</div>
 					<div>
 						<button type="button" onclick="location.href='/boardlist.do'">목록</button>
-						<a href="/update.do?p_id=${viewlist.p_id}">수정</a>
-						<a href="/delete.do?p_id=${viewlist.p_id}">삭제</a>
+						<a href="/boardupdate.do?p_id=${viewlist.p_id}">수정</a>
+						<a href="/boarddelete.do?p_id=${viewlist.p_id}">삭제</a>
 					</div>
 				</form>
 			</div>

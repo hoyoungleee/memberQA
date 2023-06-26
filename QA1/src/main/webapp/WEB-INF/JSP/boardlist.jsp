@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@include file="./header.jsp" %>
 <style>
 body {
    font-family: Arial, sans-serif;

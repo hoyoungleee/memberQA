@@ -14,11 +14,38 @@
 <!-- 비밀번호 암호화 등 -->
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <style type="text/css">
-	header{
-		background-color: Lightgray;
-		font-size:30pt;
-		text-align : right;
-		height: 70px;
+	header {
+		background-color: lightgray;
+		font-size: 30pt;
+		text-align: right;
+		height: 100px;
+		padding: 10px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	header a {
+		margin: 0 10px;
+		text-decoration: none;
+		color: #333;
+		font-weight: bold;
+	}
+
+	header a:hover {
+		color: #555;
+	}
+
+	header button {
+		background-color: #007bff;
+		border: none;
+		color: #fff;
+		padding: 8px 16px;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: background-color 0.3s;
+	}
+
+	header button:hover {
+		background-color: #0056b3;
 	}
 </style>
 <script type="text/javascript" src="../common/member.js"></script>

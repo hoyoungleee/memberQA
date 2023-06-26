@@ -39,7 +39,7 @@ public class BoardController {
    
    // 쓰기 처리
    // value = 쓰기처리 하는 url? jsp에 action
-   @RequestMapping(value = "/write.do", method = RequestMethod.POST)
+   @RequestMapping(value = "/boardnewwrite.do", method = RequestMethod.POST)
    public ModelAndView write(BoardVO vo, HttpServletRequest request, ModelAndView mav) throws Exception {
 
       // 가져옴
@@ -90,7 +90,7 @@ public class BoardController {
 
          return mav;
       }
-      @GetMapping("/update.do")
+      @GetMapping("/boardupdate.do")
       public ModelAndView modify(HttpServletRequest req,BoardVO vo,ModelAndView mav) throws Exception {
          String id = req.getParameter("p_id"); //pid 하드코딩
          System.out.println(id);
@@ -108,7 +108,7 @@ public class BoardController {
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
    
    //delete
-   @RequestMapping(value = "/delete.do", method = {RequestMethod.GET,RequestMethod.POST})
+   @RequestMapping(value = "/boarddelete.do", method = {RequestMethod.GET,RequestMethod.POST})
    public  ModelAndView delete(BoardVO vo, HttpServletRequest request, ModelAndView mav) throws Exception{
          
          String a = request.getParameter("p_id");
@@ -213,7 +213,7 @@ public class BoardController {
       
      @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
      @ResponseBody
-     ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
+     ModelAndView boardview(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
         
         
         //MVC 
