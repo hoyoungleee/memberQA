@@ -63,6 +63,13 @@ textarea {
 	border-radius: 3px;
 	border: 1px solid #DDA520;
 }
+
+table tr th:first-child,
+table tr td:first-child {
+    height: 30px;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -86,8 +93,8 @@ textarea {
 		    $('#open').val(selectedValue);
 		  });
 
-		  // 디폴트값 설정
-		  $('#admin_answer').val('N');
+		  $('input[name="open"][value="N"]').prop('checked', true);
+		  $('#open').val('N');
 		});
 
 
@@ -100,8 +107,8 @@ textarea {
 			<form method="post" id="formWrite">
 				<input type="hid den" name="tp" id="tp" value="${tp}">
 				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}">
-				<input type="hid den" name="lv" id="lv" value="${update.lv}">권한 
-				<input type="hid den" name="open" id="open" value="${open}">권한 
+				<input type="hid den" name="lv" id="lv" value="${update.lv}"> 
+				<input type="hid den" name="open" id="open" value="${open}">
 				<div>
 					<table>
 						<tr>
@@ -110,16 +117,16 @@ textarea {
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td><textarea rows="5" name="title" cols="90">${update.title}</textarea></td>
+							<td><textarea rows="2" name="title" cols="90">${update.title}</textarea></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="10" name="description" cols="90">${update.description}</textarea></td>
+							<td><textarea rows="5" name="description" cols="90">${update.description}</textarea></td>
 						</tr>
 						<tr>
 							<th>답변</th>
 							<td>
-								<textarea rows="10" name="admin_answer" cols="90">${update.admin_answer}</textarea>
+								<textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea>
 							</td>
 						</tr>
 					</table>
@@ -128,8 +135,8 @@ textarea {
 					<button type="button" onclick="formsubmit()">저장</button>
 					<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 					
-					  <input type='radio' name='open' value='open' />공개
- 					  <input type='radio' name='open' value='noopen' />비공개
+					  <input type='radio' name='open' value='N' />공개
+ 					  <input type='radio' name='open' value='Y' />비공개
 					<br>
 				</div>
 			</form>

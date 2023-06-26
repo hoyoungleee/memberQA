@@ -176,14 +176,16 @@ $(document).ready(function() {
 	            var answer = obj.admin_answer == "" ? 'N' : 'Y';
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
 
-	            var html = "<tr>" + "<td><a href='/boardview.do?p_id="
-	                  + obj.p_id + "'>" + obj.title + "</a></td>"
-	                  + "<td>" + obj.description + "</td>" + "<td>"
-	                  + obj.reg_dt + "</td>"
-	                  + "<td class='" + answerClass + "'>" + answer
-	                  + "</td>" + "<td>"
-	                  + obj.user + "</td>" + "</tr>";
-	            $("#AjaxBoard").append(html);
+	            var html = "<tr>" +
+	            "<td><a href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>" +
+	            "<td>" + obj.description + "</td>" +
+	            "<td>" + obj.reg_dt + "</td>" +
+	            "<td class='" + answerClass + "'>" + answer + "</td>" +
+	            "<td>" + obj.user + "</td>" +
+	            "<td>" + obj.text_open + "</td>" +
+	            "</tr>";
+
+	        $("#AjaxBoard").append(html);
 
 	            count++; // 각각의 게시물이 추가될 때마다 count 증가
 	         });
@@ -231,6 +233,7 @@ $(document).ready(function() {
                   <th>작성일</th>
                   <th>답변여부</th>
                   <th>ID</th>
+                  <th>개방여부</th>
                </tr>
             </thead>
             <tbody id="AjaxBoard">

@@ -50,7 +50,7 @@
       DESCRIPTION, REG_DT, TEXT_OPEN, ANSWER,
       ADMIN_ANSWER, user)
       VALUES
-      (#{title},#{description},now(),'Y', #{answer},'N', 'c')
+      (#{title},#{description},now(), #{text_open}, #{answer},'N', 'c')
    </insert>
 
    <!-- delete -->

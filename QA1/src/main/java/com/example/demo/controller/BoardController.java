@@ -47,6 +47,7 @@ public class BoardController {
       String b = request.getParameter("description");
       String c = request.getParameter("admin_answer");
       String d = request.getParameter("user");
+      String e = request.getParameter("e");
       System.out.println(a);
       System.out.println(b);
       System.out.println(c);
@@ -58,6 +59,8 @@ public class BoardController {
       vo.setDescription(b);
       vo.setAdmin_answer(c);
       vo.setUser(d);
+      vo.setText_open(e);
+      
       //boardService에 insert실행(쿼리문)
       boardService.insert(vo);
       
