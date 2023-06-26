@@ -80,9 +80,9 @@ textarea {
 		  // 페이지가 로드될 때 실행되는 코드
 
 		  // 라디오 버튼 그룹 상태 변경 이벤트 리스너
-		  $('input[name="answer_status"]').change(function() {
-		    var selectedValue = $('input[name="answer_status"]:checked').val();
-		    $('#admin_answer').val(selectedValue);
+		  $('input[name="open"]').change(function() {
+		    var selectedValue = $('input[name="open"]:checked').val();
+		    $('#open').val(selectedValue);
 		  });
 
 		  // 디폴트값 설정
@@ -99,7 +99,8 @@ textarea {
 			<form method="post" id="formWrite">
 				<input type="hid den" name="tp" id="tp" value="${tp}">
 				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}">
-				<input type="hid den" name="lv" id="lv" value="${update.lv}">
+				<input type="hid den" name="lv" id="lv" value="${update.lv}">권한 
+				<input type="hid den" name="open" id="open" value="${open}">권한 
 				<div>
 					<table>
 						<tr>
@@ -125,6 +126,9 @@ textarea {
 				<div>
 					<button type="button" onclick="formsubmit()">저장</button>
 					<button type="button" onclick="location.href='/boardlist.do'">목록</button>
+					
+					  <input type='radio' name='open' value='open' />공개
+ 					  <input type='radio' name='open' value='noopen' />비공개
 					<br>
 				</div>
 			</form>
