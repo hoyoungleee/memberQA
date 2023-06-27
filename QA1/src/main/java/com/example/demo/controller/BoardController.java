@@ -14,6 +14,7 @@ import com.example.demo.boardservice.BoardService;
 import com.example.demo.vo.BoardVO;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class BoardController {
@@ -23,10 +24,16 @@ public class BoardController {
 
    // 페이지 이동
    @GetMapping("/boardwrite.do")
-   public ModelAndView write(ModelAndView mav) {
-      mav.addObject("tp", "write");
-      mav.setViewName("boardwrite");
-      return mav;
+   public ModelAndView write(HttpServletRequest request, ModelAndView mav) {
+       HttpSession session = request.getSession();// session
+       String id = (String) session.getAttribute("id"); // session
+
+       System.out.println(id); // "id" 값을 서버 콘솔에 출력
+
+       mav.addObject("tp", "write");
+       mav.addObject("id", id); //session
+       mav.setViewName("boardwrite");
+       return mav;
    }
 
    
@@ -46,14 +53,10 @@ public class BoardController {
       String a = request.getParameter("title");
       String b = request.getParameter("description");
       String c = request.getParameter("admin_answer");
-      String d = request.getParameter("user");
-      String e = request.getParameter("e");
-      System.out.println(a);
-      System.out.println(b);
-      System.out.println(c);
-      System.out.println(d);
+      String d = request.getParameter("id");
+      String e = request.getParameter("open");
 
-
+    
       // vo에 넣음
       vo.setTitle(a);
       vo.setDescription(b);
@@ -86,6 +89,8 @@ public class BoardController {
          vo.setTitle(req.getParameter("title"));
          vo.setDescription(req.getParameter("description"));
          vo.setAdmin_answer(req.getParameter("admin_answer"));
+         vo.setP_id(req.getParameter("p_id"));
+         vo.setText_open(req.getParameter("open"));
          vo.setTp("modify");
          boardService.update(vo);
          //mav.setViewName("redirect:/boardlist.do");
@@ -93,20 +98,22 @@ public class BoardController {
 
          return mav;
       }
+
+      
       @GetMapping("/boardupdate.do")
       public ModelAndView modify(HttpServletRequest req,BoardVO vo,ModelAndView mav) throws Exception {
          String id = req.getParameter("p_id"); //pid 하드코딩
-         System.out.println(id);
          BoardVO mod  = boardService.view(id);
-//         int pid = Integer.parseInt(req.getParameter("p_id"));
-//         int p_id = mod.getP_id();
          mav.addObject("tp", "modify");
-//         mav.addObject("p_id", id); //하드코딩
-//         mav.addObject("title", mod.getTitle()); //하드코딩
+         mav.addObject("p_id", id); 
          mav.addObject("update", mod);
          mav.setViewName("boardwrite");
          return mav;
-      }      
+      }    
+      
+      
+      
+      
       
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
    
@@ -201,7 +208,9 @@ public class BoardController {
 //      return mav;
 //   }
 //   
-//   
+   
+    
+    
 ////ajax   
 //     @RequestMapping(value = "/viewAjax.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
 //     @ResponseBody
@@ -212,25 +221,26 @@ public class BoardController {
 //     }
    
    
-      //mvc 
       
      @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
-     @ResponseBody
      ModelAndView boardview(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
-        
-        
-        //MVC 
-        String p_id = request.getParameter("p_id");
-     
+    	 HttpSession session = request.getSession();// session
+         String id = (String) session.getAttribute("id"); // session
+      //MVC 
+     String p_id = request.getParameter("p_id");
      BoardVO views = boardService.view(p_id);
      
-     mav.addObject("viewlist", views);
+     System.out.println(id); // "id" 값을 서버 콘솔에 출력
      
+     
+     
+     
+     mav.addObject("viewlist", views);
+     mav.addObject("id", id); //session
      mav.setViewName("boardview");
 
       return mav;
    }
-   
    
    
    

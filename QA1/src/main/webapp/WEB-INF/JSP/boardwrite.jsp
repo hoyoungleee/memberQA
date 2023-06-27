@@ -73,14 +73,7 @@ table tr td:first-child {
 </style>
 
 <script type="text/javascript">
-	function formsubmit() {
-		if ($("#tp").val() == "write") {
-			$("#formWrite").attr("action", "/boardnewwrite.do").submit();
-		} else {
-			$("#formWrite").attr("action", "/updateaction.do").submit();
-		}
-	}
-	
+
 	
 	
 	
@@ -97,8 +90,55 @@ table tr td:first-child {
 		  $('#open').val('N');
 		});
 
-
 </script>
+
+
+
+
+<script type="text/javascript">
+    function formsubmit() {
+        // 제목과 내용을 변수에 저장
+        var title = $('textarea[name="title"]').val();
+        var description = $('textarea[name="description"]').val();
+
+        // 제목이 비어있는 경우 알림창을 띄우고 함수 실행 중지
+        if (title === '') {
+            alert('제목을 확인해주세요.');
+            return;
+        }
+
+        // 내용이 비어있는 경우 알림창을 띄우고 함수 실행 중지
+        if (description === '') {
+            alert('내용을 확인해주세요.');
+            return;
+        }
+
+        // 제목과 내용이 모두 입력되었을 경우, form을 제출할 URL을 설정하고 submit() 함수를 호출
+        if ($("#tp").val() == "write") {
+            $("#formWrite").attr("action", "/boardnewwrite.do").submit();
+        } else {
+            $("#formWrite").attr("action", "/updateaction.do").submit();
+        }
+    }
+    
+    
+
+    $(document).ready(function() {
+        // 페이지가 로드될 때 실행되는 코드
+
+        // 내용 textarea의 입력값이 변경될 때마다 실행되는 이벤트 리스너
+        $('textarea[name="description"]').on('input', function() {
+            // 내용 textarea의 값이 비어있을 경우 저장 버튼 비활성화
+            if ($(this).val() === '') {
+                $('#saveButton').prop('disabled', true);
+            } else {
+                $('#saveButton').prop('disabled', false);
+            }
+        });
+    });
+</script>
+
+
 </head>
 <body>
 	<div class="centered">
@@ -106,14 +146,15 @@ table tr td:first-child {
 			<h1>상세 페이지</h1>
 			<form method="post" id="formWrite">
 				<input type="hid den" name="tp" id="tp" value="${tp}">
-				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}">
-				<input type="hid den" name="lv" id="lv" value="${update.lv}"> 
-				<input type="hid den" name="open" id="open" value="${open}">
+				<input type="hid den" name="lv" id="lv" value="${update.lv}"> 권한
+				<input type="hid den" name="id" id="id" value="${id}"> id
+				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> pid
+				<input type="hid den" name="open" id="open" value="${open}"> 개방여부
 				<div>
 					<table>
 						<tr>
 							<th>작성자</th>
-							<td>${update.user}</td>
+							<td>${id}</td>
 						</tr>
 						<tr>
 							<th>제목</th>
@@ -132,7 +173,7 @@ table tr td:first-child {
 					</table>
 				</div>
 				<div>
-					<button type="button" onclick="formsubmit()">저장</button>
+					<button id ="saveButton" type="button" onclick="formsubmit()">저장</button>
 					<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 					
 					  <input type='radio' name='open' value='N' />공개

@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
-<%@include file="./header.jsp" %>
 <style>
 body {
    font-family: Arial, sans-serif;
@@ -152,8 +152,8 @@ body {
 <!-- <script type = "text/javascript" src = "../js/board.js"></script> -->
 
 <!-- jQuery 라이브러리의 최신 버전을 가져옴 -->
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
 <script type="text/javascript">
 $(document).ready(function() {
 	   loadBoardData(1);
@@ -176,16 +176,16 @@ $(document).ready(function() {
 	            var answer = obj.admin_answer == "" ? 'N' : 'Y';
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
 
-	            var html = "<tr>" +
-	            "<td><a href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>" +
-	            "<td>" + obj.description + "</td>" +
-	            "<td>" + obj.reg_dt + "</td>" +
-	            "<td class='" + answerClass + "'>" + answer + "</td>" +
-	            "<td>" + obj.user + "</td>" +
-	            "<td>" + obj.text_open + "</td>" +
-	            "</tr>";
-
-	        $("#AjaxBoard").append(html);
+	            var html = "<tr>" 
+	            + "<td><a href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>"
+	                  + "<td>" + obj.description + "</td>" + "<td>"
+	                  + obj.reg_dt + "</td>"
+	                  + "<td class='" + answerClass + "'>" + answer
+	                  + "</td>" 
+	                  + "<td>"+ obj.user + "</td>" 
+	                  + "<td>"+ obj.text_open + "</td>" 
+	                  + "</tr>";
+	            $("#AjaxBoard").append(html);
 
 	            count++; // 각각의 게시물이 추가될 때마다 count 증가
 	         });
@@ -207,17 +207,19 @@ $(document).ready(function() {
 <title>List</title>
 </head>
 <body>
-      <!-- <div class="button-group">
+      <!-- 
+      <div class="button-group">
          <button onclick="loadBoardData(1)">1</button>
          <button onclick="loadBoardData(2)">2</button>
          <button onclick="loadBoardData(3)">3</button>
          <button onclick="loadBoardData(4)">4</button>
       </div>
- -->
+ 	-->
 
 
       <div class="container">
-         <input type="hidden" name="cnt" value="${cnt}" />
+         <input type="hid den" name="cnt" value="${cnt}" />
+         <input type="hid den" name="id" value="${id}" />
          <div class="search-group">
             <input type="text" id="search" name='search'onkeyup="if(window.event.keyCode==13){loadBoardData(1);}" placeholder="검색어를 입력하세요">
             <button type="button" onclick="javascript: loadBoardData(1);">검색</button>
@@ -233,7 +235,7 @@ $(document).ready(function() {
                   <th>작성일</th>
                   <th>답변여부</th>
                   <th>ID</th>
-                  <th>개방여부</th>
+                  <th>비밀</th>
                </tr>
             </thead>
             <tbody id="AjaxBoard">
@@ -268,6 +270,8 @@ function createPageButtons(totalPages) {
 	   }
 	}
 
+
+
 	// 페이지 버튼 생성
 	var searchQuery = $('#search').val(); // 검색어 가져오기
 
@@ -295,7 +299,5 @@ function createPageButtons(totalPages) {
 	   var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
 	   createPageButtons(totalPages);
 	}
-
-
 </script>
 </html>
