@@ -15,15 +15,22 @@ public class BoardVO {
    private String admin_answer;// 답변
    private String p_id; // 일련번호 Local_ID
    private String tp; // case 알지?
-   private String name;// 이름
+   private String name;// 게시물 작성자
    private String user;// ID
    private String lv;// 계급
    private String search;// 검색어
+   private String id;// 세션id
    
    
    
    
-   //페이지
+   public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
+//페이지
    private int page;// 페이지
     private int recordPerPage;  // 페이지당 출력할 데이터 개수
     private int pageSize;       // 화면 하단에 출력할 페이지 개수

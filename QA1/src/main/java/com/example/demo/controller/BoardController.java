@@ -101,12 +101,21 @@ public class BoardController {
 
       
       @GetMapping("/boardupdate.do")
-      public ModelAndView modify(HttpServletRequest req,BoardVO vo,ModelAndView mav) throws Exception {
-         String id = req.getParameter("p_id"); //pid 하드코딩
-         BoardVO mod  = boardService.view(id);
+      public ModelAndView modify(HttpServletRequest req,String lv,ModelAndView mav,BoardVO vo ) throws Exception {
+    	  
+    	  HttpSession session = req.getSession();// session
+          String memberid = (String) session.getAttribute("id"); // session
+    	  
+    	  vo.setId(memberid);
+    	  boardService.lv(lv);
+    	  
+         String p_id = req.getParameter("p_id"); //pid 하드코딩
+         BoardVO mod  = boardService.view(p_id);
          mav.addObject("tp", "modify");
-         mav.addObject("p_id", id); 
+         mav.addObject("p_id", p_id); 
          mav.addObject("update", mod);
+         
+         
          mav.setViewName("boardwrite");
          return mav;
       }    
@@ -159,7 +168,8 @@ public class BoardController {
    
    // 페이지 이동
    @GetMapping("/boardlist.do")
-   public ModelAndView list( BoardVO vo,ModelAndView mav) throws Exception {
+   public ModelAndView list(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
+	   
 	   //페이징
       int cnt =  boardService.count();
       mav.addObject("cnt", cnt);
@@ -209,7 +219,6 @@ public class BoardController {
 //   }
 //   
    
-    
     
 ////ajax   
 //     @RequestMapping(value = "/viewAjax.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")

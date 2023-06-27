@@ -30,5 +30,5 @@ public interface BoardMapper {
    public BoardVO view(String id) throws Exception;
    
    
-   
+   public BoardVO lv(String lv) throws Exception;
 }

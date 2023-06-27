@@ -32,5 +32,9 @@ public interface BoardService {
    //max count
    public int count() throws Exception;
    
+   
+   public BoardVO lv(String lv) throws Exception;
+   
+   
 
 }

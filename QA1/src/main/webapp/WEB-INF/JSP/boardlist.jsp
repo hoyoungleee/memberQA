@@ -175,9 +175,11 @@ $(document).ready(function() {
 	         $.each(data, function(index, obj) {
 	            var answer = obj.admin_answer == "" ? 'N' : 'Y';
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
-
+	            var idValue = $('#id').val();
+	            
+	            
 	            var html = "<tr>" 
-	            + "<td><a href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>"
+	            + "<td><a id = 'alert"+obj.p_id+"'  href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>"
 	                  + "<td>" + obj.description + "</td>" + "<td>"
 	                  + obj.reg_dt + "</td>"
 	                  + "<td class='" + answerClass + "'>" + answer
@@ -188,6 +190,23 @@ $(document).ready(function() {
 	            $("#AjaxBoard").append(html);
 
 	            count++; // 각각의 게시물이 추가될 때마다 count 증가
+	            
+	            
+	            
+	            //비밀글  ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡형태 확인하기 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡
+	            $('#alert'+obj.p_id).on('click', function(){
+	            	if(obj.text_open =='Y'&& obj.user!=idValue){
+	            			alert("권한이 없습니다.");
+	            			return false;
+	            		
+	            	}
+	            });
+	            
+	            
+	            
+	            
+	            
+	            
 	         });
 
 	         // 게시물 개수 출력 또는 활용
@@ -219,7 +238,7 @@ $(document).ready(function() {
 
       <div class="container">
          <input type="hid den" name="cnt" value="${cnt}" />
-         <input type="hid den" name="id" value="${id}" />
+         <input type="hid den" id = "id" name="id" value="${id}" />
          <div class="search-group">
             <input type="text" id="search" name='search'onkeyup="if(window.event.keyCode==13){loadBoardData(1);}" placeholder="검색어를 입력하세요">
             <button type="button" onclick="javascript: loadBoardData(1);">검색</button>
@@ -299,5 +318,15 @@ function createPageButtons(totalPages) {
 	   var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
 	   createPageButtons(totalPages);
 	}
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
 </script>
 </html>

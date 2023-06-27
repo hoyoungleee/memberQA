@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <!-- jQuery 라이브러리의 최신 버전을 가져옴 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <title>List</title>
 <%@include file="./header.jsp" %>
@@ -150,6 +151,8 @@ table tr td:first-child {
 				<input type="hid den" name="id" id="id" value="${id}"> id
 				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> pid
 				<input type="hid den" name="open" id="open" value="${open}"> 개방여부
+				<input type="hid den" name="lv" id="lv" value="${update.lv}">
+				<input type="hid den" name="lv" id="lv" value="${update.lv}">
 				<div>
 					<table>
 						<tr>
@@ -164,12 +167,18 @@ table tr td:first-child {
 							<th>내용</th>
 							<td><textarea rows="5" name="description" cols="90">${update.description}</textarea></td>
 						</tr>
+						
+						<c:if test="${update.lv eq '1'}">
 						<tr>
 							<th>답변</th>
 							<td>
 								<textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea>
 							</td>
 						</tr>
+						</c:if>
+						
+						
+						
 					</table>
 				</div>
 				<div>

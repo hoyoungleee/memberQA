@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <meta charset="UTF-8">
 <title>List</title>
 <%@include file="./header.jsp" %>
@@ -97,7 +98,10 @@
 					</div>
 					<div>
 						<button type="button" onclick="location.href='/boardlist.do'">목록</button>
+						
+						<c:if test="${viewlist.admin_answer=='' or lv=='1'}">
 						<a href="#" onclick="myupdatepage()">수정</a>
+						</c:if>
 						<a href="#" onclick ="mydeletepage()">삭제</a>
 						 <%-- <a href="/boardupdate.do?p_id=${viewlist.p_id}">답글달기</a> --%>
 						<%-- <a href="/boarddelete.do?p_id=${viewlist.p_id}">삭제</a> --%>

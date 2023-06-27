@@ -90,6 +90,27 @@
       member.auth as lv 
       FROM HJ_BOARD JOIN member ON HJ_BOARD.USER = member.id where P_ID =#{p_id}
    </select>
+   
+   
+   
+   
+   <select id="lv" parameterType="String" resultType="String">
+     select 
+     auth as lv 
+     from member where id = #{id}
+   </select>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 
 
 
