@@ -20,11 +20,18 @@ public class BoardVO {
    private String lv;// 계급
    private String search;// 검색어
    private String id;// 세션id
+   private String sessionlv;// 세션id
    
    
    
    
-   public String getId() {
+   public String getSessionlv() {
+	return sessionlv;
+}
+public void setSessionlv(String sessionlv) {
+	this.sessionlv = sessionlv;
+}
+public String getId() {
 	return id;
 }
 public void setId(String id) {

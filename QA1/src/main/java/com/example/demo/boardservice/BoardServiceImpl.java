@@ -57,19 +57,12 @@ public class BoardServiceImpl implements BoardService {
    
    
    
+   
+
    @Override
-	public BoardVO lv(String lv) throws Exception {
-	   return memberMapper.lv(lv);
+	public BoardVO sessionlv(String id) throws Exception {
+		return memberMapper.sessionlv(id);
 	}
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
    
 }

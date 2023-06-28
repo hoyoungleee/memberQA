@@ -76,6 +76,7 @@
 					<input type="hid den" name="p_id" value="${viewlist.p_id}" /> 게시글 일련번호
 					<input type="hid den" name="lv" value="${viewlist.lv}" />게시글 작성자 권한
 					<input type="hid den" name="id" value="${id}" />  현재 세션아이디
+					<input type="hid den" name="sessionlv" value="${sessionlv.sessionlv}" />  현재 세션아이디.
 					<div>
 						<table>
 							<tr>
@@ -99,7 +100,7 @@
 					<div>
 						<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 						
-						<c:if test="${viewlist.admin_answer=='' or lv=='1'}">
+						<c:if test="${viewlist.admin_answer=='' or lv=='1' or id =='jisang034'}">
 						<a href="#" onclick="myupdatepage()">수정</a>
 						</c:if>
 						<a href="#" onclick ="mydeletepage()">삭제</a>
@@ -128,19 +129,20 @@
 	 </script>
 <script>
 	 /* id값 같을때 수정하기  */
-    function myupdatepage() {
-        var idValue = "${id}";
-        var userValue = "${viewlist.user}";
-        var p_id = "${viewlist.p_id}";
+function myupdatepage() {
+    var idValue = "${id}";
+    var userValue = "${viewlist.user}";
+    var p_id = "${viewlist.p_id}";
 
-        if (idValue === userValue) {
-            // id와 user 값이 같을 경우, 수정 페이지로 이동
-            location.href = "/boardupdate.do?p_id=" + p_id;
-        } else {
-            // id와 user 값이 다를 경우, 알림 창 띄우기
-            alert("작성자만 수정 가능합니다.");
-        }
+    if (idValue === userValue || idValue === "jisang034") {
+        // id와 user 값이 같거나 idValue가 "jisang034"일 경우, 수정 페이지로 이동
+        location.href = "/boardupdate.do?p_id=" + p_id;
+    } else {
+        // id와 user 값이 다를 경우 또는 idValue가 "jisang034"가 아닐 경우, 알림 창 띄우기
+        alert("작성자만 수정 가능합니다.");
     }
+}
+
 	 
 	 
 	 

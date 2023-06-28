@@ -195,10 +195,15 @@ $(document).ready(function() {
 	            
 	            //비밀글  ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡형태 확인하기 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡
 	            $('#alert'+obj.p_id).on('click', function(){
+	            	if(idValue =='jisang034'){
+	            		return true;
+	            	}else{
+	            		
 	            	if(obj.text_open =='Y'&& obj.user!=idValue){
 	            			alert("권한이 없습니다.");
 	            			return false;
 	            		
+	            	}
 	            	}
 	            });
 	            

@@ -32,9 +32,7 @@ public interface BoardService {
    //max count
    public int count() throws Exception;
    
-   
-   public BoardVO lv(String lv) throws Exception;
-   
-   
+   //session값 
+   public BoardVO sessionlv(String id) throws Exception;
 
 }

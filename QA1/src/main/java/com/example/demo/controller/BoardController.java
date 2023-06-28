@@ -22,16 +22,19 @@ public class BoardController {
    @Autowired
    BoardService boardService;
 
-   // 페이지 이동
    @GetMapping("/boardwrite.do")
    public ModelAndView write(HttpServletRequest request, ModelAndView mav) {
-       HttpSession session = request.getSession();// session
-       String id = (String) session.getAttribute("id"); // session
+       HttpSession session = request.getSession();
+       String id = (String) session.getAttribute("id");
 
-       System.out.println(id); // "id" 값을 서버 콘솔에 출력
+       if (id == null) {
+           return new ModelAndView("redirect:/login.do");
+       }
+
+       System.out.println(id);
 
        mav.addObject("tp", "write");
-       mav.addObject("id", id); //session
+       mav.addObject("id", id);
        mav.setViewName("boardwrite");
        return mav;
    }
@@ -100,14 +103,11 @@ public class BoardController {
       }
 
       
+      //페이지 이동
       @GetMapping("/boardupdate.do")
-      public ModelAndView modify(HttpServletRequest req,String lv,ModelAndView mav,BoardVO vo ) throws Exception {
+      public ModelAndView modify(HttpServletRequest req,ModelAndView mav,BoardVO vo ) throws Exception {
     	  
-    	  HttpSession session = req.getSession();// session
-          String memberid = (String) session.getAttribute("id"); // session
-    	  
-    	  vo.setId(memberid);
-    	  boardService.lv(lv);
+    	  	  
     	  
          String p_id = req.getParameter("p_id"); //pid 하드코딩
          BoardVO mod  = boardService.view(p_id);
@@ -168,14 +168,20 @@ public class BoardController {
    
    // 페이지 이동
    @GetMapping("/boardlist.do")
-   public ModelAndView list(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
-	   
-	   //페이징
-      int cnt =  boardService.count();
-      mav.addObject("cnt", cnt);
-      mav.setViewName("boardlist");
-      System.out.println(cnt);
-      return mav;
+   public ModelAndView list(HttpServletRequest request, BoardVO vo, ModelAndView mav) throws Exception {
+       HttpSession session = request.getSession();
+       String id = (String) session.getAttribute("id");
+
+       if (id == null) {
+           return new ModelAndView("redirect:/login.do");
+       }
+
+       // 페이징
+       int cnt = boardService.count();
+       mav.addObject("cnt", cnt);
+       mav.setViewName("boardlist");
+       System.out.println(cnt);
+       return mav;
    }
    
 
@@ -231,27 +237,33 @@ public class BoardController {
    
    
       
-     @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
-     ModelAndView boardview(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
-    	 HttpSession session = request.getSession();// session
-         String id = (String) session.getAttribute("id"); // session
-      //MVC 
-     String p_id = request.getParameter("p_id");
-     BoardVO views = boardService.view(p_id);
-     
-     System.out.println(id); // "id" 값을 서버 콘솔에 출력
-     
-     
-     
-     
-     mav.addObject("viewlist", views);
-     mav.addObject("id", id); //session
-     mav.setViewName("boardview");
+    @RequestMapping(value = "/boardview.do")
+    public ModelAndView boardview(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception {
+    	//세션에서 id 값 가져오기
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("id");
 
-      return mav;
-   }
-   
-   
-   
+        vo.setId(id); // BoardVO 객체에 id 값을 설정
+
+        BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
+        mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가
+
+        System.out.println(sessionlv); // 변수에 저장된 sessionlv 값을 출력 (디버깅용)
+
+        String p_id = request.getParameter("p_id");
+        BoardVO views = boardService.view(p_id); // p_id 값을 사용하여 BoardVO 객체 조회
+
+        System.out.println(id); // id 값을 출력 (디버깅용)
+
+        mav.addObject("viewlist", views); // views 값을 ModelAndView에 추가
+        mav.addObject("id", id); // id 값을 ModelAndView에 추가 (session 값)
+
+        mav.setViewName("boardview"); // 뷰 이름 설정
+
+        return mav; // ModelAndView 반환
+    }
+
+
+
 
 }

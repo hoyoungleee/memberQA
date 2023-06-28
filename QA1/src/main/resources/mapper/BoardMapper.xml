@@ -94,11 +94,10 @@
    
    
    
-   <select id="lv" parameterType="String" resultType="String">
-     select 
-     auth as lv 
-     from member where id = #{id}
-   </select>
+<select id="sessionlv" parameterType="String" resultType="com.example.demo.vo.BoardVO">
+    SELECT auth as sessionlv FROM member WHERE id = #{id}
+</select>
+
    
    
    

@@ -147,12 +147,9 @@ table tr td:first-child {
 			<h1>상세 페이지</h1>
 			<form method="post" id="formWrite">
 				<input type="hid den" name="tp" id="tp" value="${tp}">
-				<input type="hid den" name="lv" id="lv" value="${update.lv}"> 권한
 				<input type="hid den" name="id" id="id" value="${id}"> id
 				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> pid
 				<input type="hid den" name="open" id="open" value="${open}"> 개방여부
-				<input type="hid den" name="lv" id="lv" value="${update.lv}">
-				<input type="hid den" name="lv" id="lv" value="${update.lv}">
 				<div>
 					<table>
 						<tr>
@@ -168,14 +165,15 @@ table tr td:first-child {
 							<td><textarea rows="5" name="description" cols="90">${update.description}</textarea></td>
 						</tr>
 						
-						<c:if test="${update.lv eq '1'}">
-						<tr>
-							<th>답변</th>
-							<td>
-								<textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea>
-							</td>
-						</tr>
+						<c:if test="${update.lv eq '1' or id eq 'jisang034'}">
+						    <tr>
+						        <th>답변</th>
+						        <td>
+						            <textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea>
+						        </td>
+						    </tr>
 						</c:if>
+
 						
 						
 						
