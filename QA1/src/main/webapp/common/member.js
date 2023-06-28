@@ -283,6 +283,7 @@ function loginForm() {
 
 
 					alert("로그인 성공! 환영합니다.");
+					location.href = "/boardlist.do"; 
 				}
 				else {
 					alert("회원정보가 맞지않습니다.");
