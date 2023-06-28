@@ -173,7 +173,7 @@ $(document).ready(function() {
 	         var count = 0; // 게시물 개수를 저장할 변수
 
 	         $.each(data, function(index, obj) {
-	            var answer = obj.admin_answer == "" ? 'N' : 'Y';
+	        	 var answer = obj.admin_answer === null || obj.admin_answer === "" ? 'N' : 'Y';
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
 	            var idValue = $('#id').val();
 	            
@@ -242,6 +242,7 @@ $(document).ready(function() {
 
 
       <div class="container">
+      <table>총 게시물 수 ${cnt}</table>
          <input type="hid den" name="cnt" value="${cnt}" />
          <input type="hid den" id = "id" name="id" value="${id}" />
          <div class="search-group">

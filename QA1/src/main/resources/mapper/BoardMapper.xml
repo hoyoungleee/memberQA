@@ -45,6 +45,10 @@
    <select id="count" resultType="int" parameterType="com.example.demo.vo.BoardVO">
  SELECT COUNT(HJ_BOARD.P_ID) as CNT
      FROM HJ_BOARD JOIN member ON HJ_BOARD.USER = member.id
+     <if test="search != null">
+      WHERE 1 = 1
+         AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
+      </if>
    </select>
 
    <!-- insert -->

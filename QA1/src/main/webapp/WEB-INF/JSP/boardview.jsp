@@ -73,10 +73,11 @@
 			</div>
 			<div>
 				<form method="post">
-					<input type="hid den" name="p_id" value="${viewlist.p_id}" /> 게시글 일련번호
-					<input type="hid den" name="lv" value="${viewlist.lv}" />게시글 작성자 권한
-					<input type="hid den" name="id" value="${id}" />  현재 세션아이디
-					<input type="hid den" name="sessionlv" value="${sessionlv.sessionlv}" />  현재 세션아이디.
+					<input type="hidden" name="p_id" value="${viewlist.p_id}" />
+					<input type="hidden" name="lv" value="${viewlist.lv}" />
+					<input type="hidden" name="id" value="${id}" />
+					<input type="hidden" name="sessionlv" value="${sessionlv.sessionlv}" />
+					<input type="hidden" name=user value="${viewlist.user}" />
 					<div>
 						<table>
 							<tr>
@@ -100,7 +101,7 @@
 					<div>
 						<button type="button" onclick="location.href='/boardlist.do'">목록</button>
 						
-						<c:if test="${viewlist.admin_answer=='' or lv=='1' or id =='jisang034'}">
+						<c:if test="${viewlist.admin_answer==null or viewlist.admin_answer=='' or sessionlv.sessionlv=='1'}">
 						<a href="#" onclick="myupdatepage()">수정</a>
 						</c:if>
 						<a href="#" onclick ="mydeletepage()">삭제</a>

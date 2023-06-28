@@ -147,14 +147,20 @@ table tr td:first-child {
 			<h1>상세 페이지</h1>
 			<form method="post" id="formWrite">
 				<input type="hid den" name="tp" id="tp" value="${tp}">
-				<input type="hid den" name="id" id="id" value="${id}"> id
-				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> pid
-				<input type="hid den" name="open" id="open" value="${open}"> 개방여부
+				<input type="hid den" name="id" id="id" value="${id}"> 
+				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> 
+				<input type="hidden" name="open" id="open" value="${open}"> 
+				<input type="hidden" name="sessionlv" id="sessionlv" value="${sessionlv.sessionlv}">
 				<div>
 					<table>
 						<tr>
 							<th>작성자</th>
-							<td>${id}</td>
+							<td>
+					 			<c:choose>
+					                <c:when test="${tp eq 'write'}">${id}</c:when>
+					                <c:when test="${tp eq 'modify'}">${update.user}</c:when>
+					            </c:choose>
+							</td>
 						</tr>
 						<tr>
 							<th>제목</th>
@@ -165,7 +171,7 @@ table tr td:first-child {
 							<td><textarea rows="5" name="description" cols="90">${update.description}</textarea></td>
 						</tr>
 						
-						<c:if test="${update.lv eq '1' or id eq 'jisang034'}">
+						<c:if test="${sessionlv.sessionlv eq '1' or id eq 'jisang034'}">
 						    <tr>
 						        <th>답변</th>
 						        <td>
