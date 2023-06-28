@@ -102,6 +102,7 @@ table tr td:first-child {
         var title = $('textarea[name="title"]').val();
         var description = $('textarea[name="description"]').val();
 
+       
         // 제목이 비어있는 경우 알림창을 띄우고 함수 실행 중지
         if (title === '') {
             alert('제목을 확인해주세요.');
@@ -113,6 +114,7 @@ table tr td:first-child {
             alert('내용을 확인해주세요.');
             return;
         }
+        
 
         // 제목과 내용이 모두 입력되었을 경우, form을 제출할 URL을 설정하고 submit() 함수를 호출
         if ($("#tp").val() == "write") {

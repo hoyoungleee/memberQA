@@ -49,8 +49,8 @@ public class BoardServiceImpl implements BoardService {
    
    
    @Override
-   public int count() throws Exception {
-      int count = memberMapper.count();
+   public int count(String search) throws Exception {
+      int count = memberMapper.count(search);
       return count;
       
    }

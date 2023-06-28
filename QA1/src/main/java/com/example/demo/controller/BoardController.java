@@ -98,27 +98,32 @@ public class BoardController {
          boardService.update(vo);
          //mav.setViewName("redirect:/boardlist.do");
          mav.setViewName("redirect:/boardview.do?p_id=" + vo.getP_id());
-
          return mav;
       }
 
-      
-      //페이지 이동
+      //페이지이동
       @GetMapping("/boardupdate.do")
-      public ModelAndView modify(HttpServletRequest req,ModelAndView mav,BoardVO vo ) throws Exception {
-    	  
-    	  	  
-    	  
-         String p_id = req.getParameter("p_id"); //pid 하드코딩
-         BoardVO mod  = boardService.view(p_id);
-         mav.addObject("tp", "modify");
-         mav.addObject("p_id", p_id); 
-         mav.addObject("update", mod);
-         
-         
-         mav.setViewName("boardwrite");
-         return mav;
-      }    
+      public ModelAndView modify(HttpServletRequest req, ModelAndView mav, BoardVO vo) throws Exception {
+          // 세션에서 id 값 가져오기
+          HttpSession session = req.getSession();
+          String id = (String) session.getAttribute("id");
+          System.out.println(id); // 값 확인
+
+          vo.setId(id); // BoardVO에 값 설정
+          BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
+          mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가(sessionlv. 이름으로 sessionlv 를 뿌린다)
+
+          System.out.println(mav.addObject("sessionlv", sessionlv)); // 값 확인
+          String p_id = req.getParameter("p_id"); // pid 하드코딩
+          BoardVO mod = boardService.view(p_id);
+          mav.addObject("tp", "modify");
+          mav.addObject("p_id", p_id);
+          mav.addObject("update", mod);
+
+          mav.setViewName("boardwrite");
+          return mav;
+      }
+
       
       
       
@@ -169,6 +174,9 @@ public class BoardController {
    // 페이지 이동
    @GetMapping("/boardlist.do")
    public ModelAndView list(HttpServletRequest request, BoardVO vo, ModelAndView mav) throws Exception {
+	   String search = request.getParameter("search");
+	   
+	   
        HttpSession session = request.getSession();
        String id = (String) session.getAttribute("id");
 
@@ -177,7 +185,7 @@ public class BoardController {
        }
 
        // 페이징
-       int cnt = boardService.count();
+       int cnt = boardService.count(search);
        mav.addObject("cnt", cnt);
        mav.setViewName("boardlist");
        System.out.println(cnt);
@@ -189,7 +197,7 @@ public class BoardController {
     @RequestMapping(value = "/boardAjax.do", produces = "application/json;charset=UTF-8")
     //json형태 
    @ResponseBody
-   public List<BoardVO> boardList(HttpServletRequest request) throws Exception {
+   public List<BoardVO> boardList(ModelAndView mav,HttpServletRequest request) throws Exception {
        
        //검색파라미터 
       String search = request.getParameter("search");
@@ -202,6 +210,17 @@ public class BoardController {
       BoardVO vo = new BoardVO();
       vo.setSearch(search);
       vo.setPage(page);
+      
+      
+      
+      
+      
+      //검색 후 게시물 count
+      int cnt = boardService.count(search);
+      mav.addObject("cnt", cnt);
+      System.out.println("이야아"+cnt);
+      
+      
       
        List<BoardVO> lists = boardService.getLists(vo);
 

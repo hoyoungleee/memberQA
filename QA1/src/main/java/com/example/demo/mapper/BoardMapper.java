@@ -25,7 +25,7 @@ public interface BoardMapper {
    public void delete(BoardVO vo) throws Exception;
    
    //max count
-   public int count() throws Exception;
+   public int count(String search) throws Exception;
    
    public BoardVO view(String id) throws Exception;
    

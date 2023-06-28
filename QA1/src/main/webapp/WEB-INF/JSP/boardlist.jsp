@@ -173,7 +173,7 @@ $(document).ready(function() {
 	         var count = 0; // 게시물 개수를 저장할 변수
 
 	         $.each(data, function(index, obj) {
-	        	 var answer = obj.admin_answer === null || obj.admin_answer === "" ? 'N' : 'Y';
+	        	var answer = obj.admin_answer === null || obj.admin_answer === "" ? 'N' : 'Y';
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
 	            var idValue = $('#id').val();
 	            
@@ -193,7 +193,7 @@ $(document).ready(function() {
 	            
 	            
 	            
-	            //비밀글  ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡형태 확인하기 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡
+	            //비밀글 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡형태 확인하기 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡
 	            $('#alert'+obj.p_id).on('click', function(){
 	            	if(idValue =='jisang034'){
 	            		return true;
@@ -202,20 +202,17 @@ $(document).ready(function() {
 	            	if(obj.text_open =='Y'&& obj.user!=idValue){
 	            			alert("권한이 없습니다.");
 	            			return false;
-	            		
 	            	}
 	            	}
 	            });
-	            
-	            
-	            
-	            
-	            
-	            
 	         });
 
 	         // 게시물 개수 출력 또는 활용
 	         console.log("게시물 개수:", count);
+	         if ($('#search').val() !== "" && $('#search').val() !== null) {
+	        	   $('#cnt').val(count);
+	        	}
+
 	         
 
 	         createPageButtons(totalPages);
@@ -285,6 +282,7 @@ function createPageButtons(totalPages) {
 
 	   for (var i = 1; i <= pageCount; i++) {
 	      var button = $("<button>").text(i); 
+	      // 페이지 버튼 클릭 시 해당 페이지의 데이터 로드
 	      button.click(function() {
 	         var page = $(this).text();
 	         loadBoardData(page);

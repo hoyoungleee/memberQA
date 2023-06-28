@@ -22,6 +22,17 @@ public class BoardVO {
    private String id;// 세션id
    private String sessionlv;// 세션id
    
+   //페이징 추가 
+   private int pageable;      
+   private int pagenumber;    
+   private int totalPages;     
+   private int currentPage;    
+   private int cnt; //게시물 max     
+   
+//페이지
+   private int page;// 페이지
+   private int recordPerPage;  // 페이지당 출력할 데이터 개수
+   private int pageSize;       // 화면 하단에 출력할 페이지 개수
    
    
    
@@ -37,19 +48,8 @@ public String getId() {
 public void setId(String id) {
 	this.id = id;
 }
-//페이지
-   private int page;// 페이지
-    private int recordPerPage;  // 페이지당 출력할 데이터 개수
-    private int pageSize;       // 화면 하단에 출력할 페이지 개수
     
     
-    
-    //페이징 추가 
-    private int pageable;      
-    private int pagenumber;    
-    private int totalPages;     
-    private int currentPage;    
-    private int cnt; //게시물 max     
     
     
     
