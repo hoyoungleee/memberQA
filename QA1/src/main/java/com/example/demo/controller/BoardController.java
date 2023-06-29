@@ -170,65 +170,35 @@ public class BoardController {
    //페이지 이동하는거 하나 필요하고 
    // json list로 뿌려주는 거 하나 
 
-   
    // 페이지 이동
    @GetMapping("/boardlist.do")
-   public ModelAndView list(HttpServletRequest request, BoardVO vo, ModelAndView mav) throws Exception {
-	   String search = request.getParameter("search");
+   public ModelAndView list(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
 	   
-	   
-       HttpSession session = request.getSession();
-       String id = (String) session.getAttribute("id");
-
-       if (id == null) {
-           return new ModelAndView("redirect:/login.do");
-       }
-
-       // 페이징
-       int cnt = boardService.count(search);
-       mav.addObject("cnt", cnt);
-       mav.setViewName("boardlist");
-       System.out.println(cnt);
-       return mav;
+      return mav;
    }
+   
    
 
    //Ajax 추가
     @RequestMapping(value = "/boardAjax.do", produces = "application/json;charset=UTF-8")
     //json형태 
    @ResponseBody
-   public List<BoardVO> boardList(ModelAndView mav,HttpServletRequest request) throws Exception {
+   public List<BoardVO> boardList(HttpServletRequest request) throws Exception {
        
        //검색파라미터 
       String search = request.getParameter("search");
       
       //페이지
       int page = Integer.parseInt(request.getParameter("page"));
-      //int maxcount = Integer.parseInt(request.getParameter("cnt"));
-      
       //값 전달
       BoardVO vo = new BoardVO();
       vo.setSearch(search);
       vo.setPage(page);
       
-      
-      
-      
-      
-      //검색 후 게시물 count
-      int cnt = boardService.count(search);
-      mav.addObject("cnt", cnt);
-      System.out.println("이야아"+cnt);
-      
-      
-      
        List<BoardVO> lists = boardService.getLists(vo);
-
-      
        return lists;
    } 
    
-    
     
    
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */   

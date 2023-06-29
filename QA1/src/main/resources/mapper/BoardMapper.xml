@@ -17,21 +17,21 @@
 
 <!-- 검색 LIST 쿼리 -->
 
-   <select id="getLists" parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
-           SELECT 
-     HJ_BOARD.TITLE,
-     HJ_BOARD.DESCRIPTION,
-     HJ_BOARD.REG_DT,
-     HJ_BOARD.TEXT_OPEN,
-     HJ_BOARD.ANSWER,
-     HJ_BOARD.ADMIN_ANSWER,
-     HJ_BOARD.user,
-     HJ_BOARD.P_ID,
-     member.auth AS lv
+   <select id="getLists"
+      parameterType="com.example.demo.vo.BoardVO" resultType="com.example.demo.vo.BoardVO">
+      SELECT *,
+      (select count(title) from hj_board  WHERE 1 = 1
+         AND ( HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%') OR HJ_BOARD.DESCRIPTION LIKE CONCAT('%', #{search}, '%') or
+          HJ_BOARD.USER LIKE CONCAT('%', #{search}, '%')) ) as cnt
       FROM HJ_BOARD JOIN member ON HJ_BOARD.USER = member.id
-      <if test="search != null">
       WHERE 1 = 1
-         AND HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%')
+      <if test="search != null">
+         AND
+         (
+         HJ_BOARD.TITLE LIKE CONCAT('%', #{search}, '%') or
+          HJ_BOARD.DESCRIPTION LIKE CONCAT('%', #{search}, '%') or
+          HJ_BOARD.USER LIKE CONCAT('%', #{search}, '%')
+         )
       </if>
        order by HJ_BOARD.REG_DT desc
       <if test="page != null">
@@ -39,6 +39,7 @@
       </if>
      
    </select>
+   
    
    
    

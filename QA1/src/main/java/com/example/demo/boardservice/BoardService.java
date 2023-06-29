@@ -29,8 +29,6 @@ public interface BoardService {
    public BoardVO view(String id) throws Exception;
    
    
-   //max count
-   public int count(String search) throws Exception;
    
    //session값 
    public BoardVO sessionlv(String id) throws Exception;
