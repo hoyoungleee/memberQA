@@ -172,9 +172,13 @@ $(document).ready(function() {
 	         var count = 0; // 게시물 개수를 저장할 변수
 
 	         $.each(data, function(index, obj) {
+	        	 //답변여부
 	        	var answer = obj.admin_answer === null || obj.admin_answer === "" ? 'N' : 'Y';
+	        	 //답변여부 스타일
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
+	            //세션아이디
 	            var idValue = $('#id').val();
+	            //게시물 갯수
 	            var count = obj.cnt;
 	            
 	            
@@ -225,6 +229,7 @@ $(document).ready(function() {
 <title>List</title>
 </head>
 <body>
+<br><br><br><br><br><br><br><br>
       <div class="container">
          <input type="hidden" id = "id" name="id" value="${id}" />
          <div class="search-group">

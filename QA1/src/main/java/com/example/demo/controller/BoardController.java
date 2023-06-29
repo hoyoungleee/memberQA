@@ -174,6 +174,17 @@ public class BoardController {
    @GetMapping("/boardlist.do")
    public ModelAndView list(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
 	   
+	   //세션 값 가져오기
+	   HttpSession session = request.getSession();
+	   String memberid = (String) session.getAttribute("id");
+	   // id값이 없으면 로그인 페이지로 이동
+	   if (memberid == null) {
+	      mav.setViewName("redirect:/login.do");
+	      mav.addObject("message", "로그인 후 이용해주세요");
+	      return mav;
+	   }
+	   
+	   
       return mav;
    }
    
@@ -255,4 +266,41 @@ public class BoardController {
 
 
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // 페이지 이동
+    @GetMapping("/icon.do")
+    public ModelAndView icon(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
+ 	   
+ 	   
+       return mav;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

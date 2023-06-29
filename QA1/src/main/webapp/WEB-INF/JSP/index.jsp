@@ -15,12 +15,5 @@
 	<hr>
 	<br>
 	<strong>아직 회원이 아니시라면</strong> <a href="/reg.do">회원가입하기</a>
-		<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	 <a href="/boardlist.do">목록가기</a>
 </body>
 </html>
