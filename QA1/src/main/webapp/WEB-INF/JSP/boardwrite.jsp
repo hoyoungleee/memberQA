@@ -98,18 +98,17 @@ table tr td:first-child {
 
 <script type="text/javascript">
     function formsubmit() {
-        // 제목과 내용을 변수에 저장
         var title = $('textarea[name="title"]').val();
         var description = $('textarea[name="description"]').val();
 
        
-        // 제목이 비어있는 경우 알림창을 띄우고 함수 실행 중지
+        // 제목이 비어있는 경우
         if (title === '') {
             alert('제목을 확인해주세요.');
             return;
         }
 
-        // 내용이 비어있는 경우 알림창을 띄우고 함수 실행 중지
+        // 내용이 비어있는 경우
         if (description === '') {
             alert('내용을 확인해주세요.');
             return;
@@ -148,9 +147,9 @@ table tr td:first-child {
 		<div class="container">
 			<h1>상세 페이지</h1>
 			<form method="post" id="formWrite">
-				<input type="hid den" name="tp" id="tp" value="${tp}">
-				<input type="hid den" name="id" id="id" value="${id}"> 
-				<input type="hid den" name="p_id" id="p_id" value="${update.p_id}"> 
+				<input type="hidden" name="tp" id="tp" value="${tp}">
+				<input type="hidden" name="id" id="id" value="${id}"> 
+				<input type="hidden" name="p_id" id="p_id" value="${update.p_id}"> 
 				<input type="hidden" name="open" id="open" value="${open}"> 
 				<input type="hidden" name="sessionlv" id="sessionlv" value="${sessionlv.sessionlv}">
 				<div>
