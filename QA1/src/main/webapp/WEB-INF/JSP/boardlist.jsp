@@ -209,8 +209,14 @@ $(document).ready(function() {
 	            	}
 	            	}
 	            });
-	         });
+	            
+	            if (data == 'null' && data =="" ) {
+	            	  count = 0;
+	            	  $("#countmax").val(count);
+	            	}
+	            
 
+	         });
 	         var cnt = $('#countmax').val(); // 게시글 수
 	            console.log("cnt:"+cnt);
 	            var pageSize = 10; // 페이지당 보여줄 개수
@@ -293,10 +299,10 @@ function createPageButtons(totalPages) {
 
 
 // 페이지 버튼 생성
-var cnt = $('#countmax').val(); // 게시글 수
+/* var cnt = $('#countmax').val(); // 게시글 수
 console.log("cnt:"+cnt);
 var pageSize = 10; // 페이지당 보여줄 개수
 var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
-
+ */
 </script>
 </html>

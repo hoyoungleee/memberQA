@@ -37,7 +37,6 @@
       <if test="page != null">
      LIMIT #{page}, 10
       </if>
-     
    </select>
    
    

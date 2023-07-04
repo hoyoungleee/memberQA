@@ -31,21 +31,15 @@ public class BoardController {
            return new ModelAndView("redirect:/login.do");
        }
 
-       System.out.println(id);
+       //System.out.println(id);
 
        mav.addObject("tp", "write");
        mav.addObject("id", id);
        mav.setViewName("boardwrite");
        return mav;
    }
-
    
-
-   
-
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-   
-   
    
    // 쓰기 처리
    // value = 쓰기처리 하는 url? jsp에 action
@@ -59,7 +53,6 @@ public class BoardController {
       String d = request.getParameter("id");
       String e = request.getParameter("open");
 
-    
       // vo에 넣음
       vo.setTitle(a);
       vo.setDescription(b);
@@ -74,17 +67,10 @@ public class BoardController {
       mav.setViewName("redirect:/boardlist.do");
       
       return mav;
-      
-      
-      
 
    }
 
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
-
-   //기능
-   
-   
    // update
 
       @RequestMapping("/updateaction.do")
@@ -107,13 +93,13 @@ public class BoardController {
           // 세션에서 id 값 가져오기
           HttpSession session = req.getSession();
           String id = (String) session.getAttribute("id");
-          System.out.println(id); // 값 확인
+//          System.out.println(id); // 값 확인
 
           vo.setId(id); // BoardVO에 값 설정
           BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
           mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가(sessionlv. 이름으로 sessionlv 를 뿌린다)
 
-          System.out.println(mav.addObject("sessionlv", sessionlv)); // 값 확인
+//          System.out.println(mav.addObject("sessionlv", sessionlv)); // 값 확인
           String p_id = req.getParameter("p_id"); // pid 하드코딩
           BoardVO mod = boardService.view(p_id);
           mav.addObject("tp", "modify");
@@ -124,11 +110,6 @@ public class BoardController {
           return mav;
       }
 
-      
-      
-      
-      
-      
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
    
    //delete
@@ -137,10 +118,9 @@ public class BoardController {
          
          String a = request.getParameter("p_id");
          //확인
-         System.out.println(a);
+//         System.out.println(a);
          //vo에 넣음
          vo.setP_id(a);
-         //vo.setP_id("7");
          
       //boardService에 delete실행(쿼리문)
       boardService.delete(vo);
@@ -180,7 +160,6 @@ public class BoardController {
 	   // id값이 없으면 로그인 페이지로 이동
 	   if (memberid == null) {
 	      mav.setViewName("redirect:/login.do");
-	      mav.addObject("message", "로그인 후 이용해주세요");
 	      return mav;
 	   }
 	   
@@ -214,29 +193,6 @@ public class BoardController {
    
    /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */   
    
-//   //상세보기 
-//   
-//     @RequestMapping(value = "/boardview.do") //ModelAndView 무조건 public
-//     @ResponseBody
-//     ModelAndView view(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception{ 
-//        
-//        
-//      return mav;
-//   }
-//   
-   
-    
-////ajax   
-//     @RequestMapping(value = "/viewAjax.do", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-//     @ResponseBody
-//     public BoardVO boardView(HttpServletRequest request) throws Exception {
-//         String p_id = request.getParameter("p_id");
-//         BoardVO views = boardService.view(p_id);
-//         return views;
-//     }
-   
-   
-      
     @RequestMapping(value = "/boardview.do")
     public ModelAndView boardview(BoardVO vo, ModelAndView mav, HttpServletRequest request) throws Exception {
     	//세션에서 id 값 가져오기
@@ -248,12 +204,11 @@ public class BoardController {
         BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
         mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가
 
-        System.out.println(sessionlv); // 변수에 저장된 sessionlv 값을 출력 (디버깅용)
+       // System.out.println(sessionlv); // 변수에 저장된 sessionlv 값을 출력 (디버깅용)
 
         String p_id = request.getParameter("p_id");
         BoardVO views = boardService.view(p_id); // p_id 값을 사용하여 BoardVO 객체 조회
 
-        System.out.println(id); // id 값을 출력 (디버깅용)
 
         mav.addObject("viewlist", views); // views 값을 ModelAndView에 추가
         mav.addObject("id", id); // id 값을 ModelAndView에 추가 (session 값)
@@ -263,22 +218,6 @@ public class BoardController {
         return mav; // ModelAndView 반환
     }
 
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // 페이지 이동
     @GetMapping("/icon.do")
@@ -287,20 +226,4 @@ public class BoardController {
  	   
        return mav;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

@@ -6,7 +6,6 @@
 <!-- jQuery 라이브러리의 최신 버전을 가져옴 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <title>List</title>
 <%@include file="./header.jsp" %>
 <style>
@@ -21,7 +20,7 @@
 .container {
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f4;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -75,9 +74,6 @@ table tr td:first-child {
 
 <script type="text/javascript">
 
-	
-	
-	
 	$(document).ready(function() {
 		  // 페이지가 로드될 때 실행되는 코드
 
@@ -91,6 +87,7 @@ table tr td:first-child {
 		  $('#open').val('N');
 		});
 
+	
 </script>
 
 
@@ -114,30 +111,23 @@ table tr td:first-child {
             return;
         }
         
+        
+        if($("#tp").val() != "write" && $("#sessionlv").val()==='1'){
+        //에디터 값 넣기
+		oEditors.getById["admin_answer"].exec("UPDATE_CONTENTS_FIELD", []);
+		var contents = document.getElementById("admin_answer").value;
+        
+        }
 
         // 제목과 내용이 모두 입력되었을 경우, form을 제출할 URL을 설정하고 submit() 함수를 호출
         if ($("#tp").val() == "write") {
             $("#formWrite").attr("action", "/boardnewwrite.do").submit();
         } else {
             $("#formWrite").attr("action", "/updateaction.do").submit();
+          
         }
     }
     
-    
-
-    $(document).ready(function() {
-        // 페이지가 로드될 때 실행되는 코드
-
-        // 내용 textarea의 입력값이 변경될 때마다 실행되는 이벤트 리스너
-        $('textarea[name="description"]').on('input', function() {
-            // 내용 textarea의 값이 비어있을 경우 저장 버튼 비활성화
-            if ($(this).val() === '') {
-                $('#saveButton').prop('disabled', true);
-            } else {
-                $('#saveButton').prop('disabled', false);
-            }
-        });
-    });
 </script>
 
 
@@ -165,24 +155,22 @@ table tr td:first-child {
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td><textarea rows="2" name="title" cols="90">${update.title}</textarea></td>
+							<td><textarea rows="1" name="title" cols="90">${update.title}</textarea></td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="5" name="description" cols="90">${update.description}</textarea></td>
+							<td><textarea rows="3" name="description" cols="90">${update.description}</textarea></td>
 						</tr>
 						
-						<c:if test="${sessionlv.sessionlv eq '1' or id eq 'jisang034'}">
+						<c:if test="${sessionlv.sessionlv eq '1'}">
 						    <tr>
 						        <th>답변</th>
 						        <td>
-						            <textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea>
+						            <%-- <textarea rows="5" name="admin_answer" cols="90">${update.admin_answer}</textarea> --%>
+						            <textarea id = "admin_answer" name="admin_answer" >${update.admin_answer}</textarea>
 						        </td>
 						    </tr>
 						</c:if>
-
-						
-						
 						
 					</table>
 				</div>
@@ -198,4 +186,38 @@ table tr td:first-child {
 		</div>
 	</div>
 </body>
+<!--  에티터  Script Start-->
+<script type="text/javascript" src="${pageContext.request.contextPath}/libs/smarteditor/js/HuskyEZCreator.js"charset="utf-8"></script>
+<script type="text/javascript">
+
+/*
+- oAppRef: 에디터 객체를 저장할 배열
+- elPlaceHolder: 에디터를 삽입할 텍스트 에어리어의 ID
+- sSkinURI: 스마트 에디터 스킨 파일의 경로
+- fCreator: 에디터를 생성할 함수 이름
+*/
+
+
+/* 
+에디터 크기 변경시 아래 경로에 htDimension 부분 수정 
+/QA1/src/main/resources/static/libs/smarteditor/js/SE2BasicCreator.js
+
+ */
+ //에디터 호풀
+	//에디터 객체를 저장하는 배열
+	var oEditors = [];
+	window.onload = function(){
+	nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "admin_answer", //에디터를 적용할 texterear ID
+				sSkinURI : "${pageContext.request.contextPath}/libs/smarteditor/SmartEditor2Skin.html", //Editor HTML 경로
+				fCreator : "createSEditor2"
+			});
+	}
+
+	
+	
+	
+	
+</script>
 </html>
