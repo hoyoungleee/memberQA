@@ -99,7 +99,6 @@ public class BoardController {
           BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
           mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가(sessionlv. 이름으로 sessionlv 를 뿌린다)
 
-//          System.out.println(mav.addObject("sessionlv", sessionlv)); // 값 확인
           String p_id = req.getParameter("p_id"); // pid 하드코딩
           BoardVO mod = boardService.view(p_id);
           mav.addObject("tp", "modify");
@@ -153,15 +152,27 @@ public class BoardController {
    // 페이지 이동
    @GetMapping("/boardlist.do")
    public ModelAndView list(HttpServletRequest request, BoardVO vo,ModelAndView mav) throws Exception {
+	 //세션에서 id 값 가져오기
+       HttpSession session = request.getSession();
+       String id = (String) session.getAttribute("id");
+
+       vo.setId(id); // BoardVO 객체에 id 값을 설정
+
+       BoardVO sessionlv = boardService.sessionlv(id); // 첫 번째 호출의 결과를 변수에 저장
+       mav.addObject("sessionlv", sessionlv); // sessionlv 값을 ModelAndView에 추가
 	   
-	   //세션 값 가져오기
-	   HttpSession session = request.getSession();
-	   String memberid = (String) session.getAttribute("id");
+       mav.setViewName("boardlist");
+       
+	   
+	   
 	   // id값이 없으면 로그인 페이지로 이동
-	   if (memberid == null) {
+	   if (id == null) {
 	      mav.setViewName("redirect:/login.do");
 	      return mav;
 	   }
+	   
+	   
+	   
 	   
 	   
       return mav;

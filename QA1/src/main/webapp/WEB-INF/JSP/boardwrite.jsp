@@ -83,8 +83,10 @@ table tr td:first-child {
 		    $('#open').val(selectedValue);
 		  });
 
+		  //디폴트 값
 		  $('input[name="open"][value="N"]').prop('checked', true);
-		  $('#open').val('N');
+		  $('#open').val(open); 
+		  
 		});
 
 	
@@ -141,6 +143,7 @@ table tr td:first-child {
 				<input type="hidden" name="id" id="id" value="${id}"> 
 				<input type="hidden" name="p_id" id="p_id" value="${update.p_id}"> 
 				<input type="hidden" name="open" id="open" value="${open}"> 
+				<input type="hidden" name="text_open" id="text_open" value="${text_open.text_open}"> 
 				<input type="hidden" name="sessionlv" id="sessionlv" value="${sessionlv.sessionlv}">
 				<div>
 					<table>

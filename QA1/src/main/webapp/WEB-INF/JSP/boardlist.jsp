@@ -181,6 +181,8 @@ $(document).ready(function() {
 	            //게시물 갯수
 	            var count = obj.cnt;
 	            
+	            var sessionlv=  $('#sessionlv').val();
+	            
 	            
 	            var html = "<tr>" 
 	            + "<td><a id = 'alert"+obj.p_id+"'  href='/boardview.do?p_id=" + obj.p_id + "'>" + obj.title + "</a></td>"
@@ -199,7 +201,7 @@ $(document).ready(function() {
 	            
 	            //비밀글 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡ 형태 확인하기 ✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡✡
 	            $('#alert'+obj.p_id).on('click', function(){
-	            	if(idValue =='jisang034'){
+	            	if(sessionlv =='1' || idValue == obj.user ){
 	            		return true;
 	            	}else{
 	            		
@@ -210,13 +212,14 @@ $(document).ready(function() {
 	            	}
 	            });
 	            
-	            if (data == 'null' && data =="" ) {
+	            
+
+	         });
+	            if (data == 'null' || data =="" ) {
 	            	  count = 0;
 	            	  $("#countmax").val(count);
 	            	}
 	            
-
-	         });
 	         var cnt = $('#countmax').val(); // 게시글 수
 	            console.log("cnt:"+cnt);
 	            var pageSize = 10; // 페이지당 보여줄 개수
@@ -238,6 +241,8 @@ $(document).ready(function() {
 <br><br><br>
       <div class="container">
          <input type="hidden" id = "id" name="id" value="${id}" />
+         <input type="hidden" id = "sessionlv" name="sessionlv" value="${sessionlv.sessionlv}" />
+         
          <div class="search-group">
          <!--  if(window.event.keyCode==13){loadBoardData(1);} 엔터를 눌렀을때 값을 가져와라! -->
             <input type="text" id="search" name='search'onkeyup="if(window.event.keyCode==13){loadBoardData(1);}" placeholder="검색어를 입력하세요">
@@ -296,13 +301,5 @@ function createPageButtons(totalPages) {
 	      buttonGroup.append(button);
 	   }
 	}
-
-
-// 페이지 버튼 생성
-/* var cnt = $('#countmax').val(); // 게시글 수
-console.log("cnt:"+cnt);
-var pageSize = 10; // 페이지당 보여줄 개수
-var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
- */
 </script>
 </html>

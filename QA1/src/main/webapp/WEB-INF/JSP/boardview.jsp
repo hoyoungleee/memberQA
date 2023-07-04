@@ -75,9 +75,10 @@
 				<form method="post">
 					<input type="hidden" name="p_id" value="${viewlist.p_id}" />
 					<input type="hidden" name="lv" value="${viewlist.lv}" />
-					<input type="hid den" name="id" value="${id}" />
-					<input type="hid den" name="sessionlv" value="${sessionlv.sessionlv}" />
+					<input type="hidden" name="id" value="${id}" />
+					<input type="hidden" name="sessionlv" value="${sessionlv.sessionlv}" />
 					<input type="hidden" name=user value="${viewlist.user}" />
+					<input type="hidden" name=open value="${open}" />
 					<div>
 						<table>
 							<tr>
