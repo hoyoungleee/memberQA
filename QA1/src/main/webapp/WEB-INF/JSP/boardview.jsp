@@ -75,8 +75,8 @@
 				<form method="post">
 					<input type="hidden" name="p_id" value="${viewlist.p_id}" />
 					<input type="hidden" name="lv" value="${viewlist.lv}" />
-					<input type="hidden" name="id" value="${id}" />
-					<input type="hidden" name="sessionlv" value="${sessionlv.sessionlv}" />
+					<input type="hid den" name="id" value="${id}" />
+					<input type="hid den" name="sessionlv" value="${sessionlv.sessionlv}" />
 					<input type="hidden" name=user value="${viewlist.user}" />
 					<div>
 						<table>
@@ -104,7 +104,9 @@
 						<c:if test="${viewlist.admin_answer==null or viewlist.admin_answer=='' or sessionlv.sessionlv=='1'}">
 						<a href="#" onclick="myupdatepage()">수정</a>
 						</c:if>
+						<c:if test="${viewlist.admin_answer==null or viewlist.admin_answer=='' or sessionlv.sessionlv=='1'}">
 						<a href="#" onclick ="mydeletepage()">삭제</a>
+						</c:if>
 						 <%-- <a href="/boardupdate.do?p_id=${viewlist.p_id}">답글달기</a> --%>
 						<%-- <a href="/boarddelete.do?p_id=${viewlist.p_id}">삭제</a> --%>
 					</div>
@@ -134,8 +136,9 @@ function myupdatepage() {
     var idValue = "${id}";
     var userValue = "${viewlist.user}";
     var p_id = "${viewlist.p_id}";
+    var lv = "${sessionlv.sessionlv}";
 
-    if (idValue === userValue || idValue === "jisang034") {
+    if (idValue == userValue || lv ==='1' ) {
         // id와 user 값이 같거나 idValue가 "jisang034"일 경우, 수정 페이지로 이동
         location.href = "/boardupdate.do?p_id=" + p_id;
     } else {
@@ -152,8 +155,9 @@ function myupdatepage() {
     	 var idValue = "${id}";
          var userValue = "${viewlist.user}";
          var p_id = "${viewlist.p_id}";
+         var lv = "${sessionlv.sessionlv}";
          
-         if (idValue === userValue) {
+         if (idValue === userValue || lv ==='1') {
              // id와 user 값이 같을 경우, 수정 페이지로 이동
              location.href = "/boarddelete.do?p_id=" + p_id;
          } else {

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<%@include file="./header.jsp" %>
 <meta charset="UTF-8">
 <style>
 body {
@@ -89,14 +89,14 @@ body {
 
 /* Y일 때 스타일 */
 .answer-y {
-   background-color: green;
-   color: white;
+   background-color: yellow;
+   color: green;
 }
 
 /* N일 때 스타일 */
 .answer-n {
-   background-color: red;
-   color: white;
+   background-color: blue;
+   color: red;
 }
 
 .container {
@@ -229,10 +229,11 @@ $(document).ready(function() {
 <title>List</title>
 </head>
 <body>
-<br><br><br><br><br><br><br><br>
+<br><br><br>
       <div class="container">
          <input type="hidden" id = "id" name="id" value="${id}" />
          <div class="search-group">
+         <!--  if(window.event.keyCode==13){loadBoardData(1);} 엔터를 눌렀을때 값을 가져와라! -->
             <input type="text" id="search" name='search'onkeyup="if(window.event.keyCode==13){loadBoardData(1);}" placeholder="검색어를 입력하세요">
             <button type="button" onclick="javascript: loadBoardData(1);">검색</button>
             <br>
