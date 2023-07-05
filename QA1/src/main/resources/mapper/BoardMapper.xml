@@ -73,7 +73,6 @@
       TITLE = #{title},
       DESCRIPTION = #{description},
       REG_DT = now(), 
-      TEXT_OPEN = #{text_open},
       ANSWER = #{answer},
       ADMIN_ANSWER = #{admin_answer}
       where P_ID = #{p_id}

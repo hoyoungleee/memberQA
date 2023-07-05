@@ -36,6 +36,7 @@ body {
 
 .table td {
    text-align: left;
+   text-align: center;
 }
 
 .button-group {
@@ -89,13 +90,13 @@ body {
 
 /* Y일 때 스타일 */
 .answer-y {
-   background-color: yellow;
+ font-weight: bold;
    color: green;
 }
 
 /* N일 때 스타일 */
 .answer-n {
-   background-color: blue;
+ font-weight: bold;
    color: red;
 }
 
@@ -145,11 +146,7 @@ body {
    white-space: nowrap;
    overflow: hidden;
 }
-/* 수정된 스타일 끝 */
 </style>
-<!-- SJ    -->
-<!-- <script type = "text/javascript" src = "../js/board.js"></script> -->
-
 <!-- jQuery 라이브러리의 최신 버전을 가져옴 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    
@@ -160,6 +157,7 @@ $(document).ready(function() {
 
 	function loadBoardData(page) {
 	   $.ajax({
+		   //호출 URL(json)
 	      url : "/boardAjax.do",
 	      data : {
 	         'search' : $('#search').val(),
@@ -172,7 +170,7 @@ $(document).ready(function() {
 	         var count = 0; // 게시물 개수를 저장할 변수
 
 	         $.each(data, function(index, obj) {
-	        	 //답변여부
+	        	//답변여부
 	        	var answer = obj.admin_answer === null || obj.admin_answer === "" ? 'N' : 'Y';
 	        	 //답변여부 스타일
 	            var answerClass = answer === 'Y' ? 'answer-y' : 'answer-n';
@@ -180,7 +178,7 @@ $(document).ready(function() {
 	            var idValue = $('#id').val();
 	            //게시물 갯수
 	            var count = obj.cnt;
-	            
+	            //권한 
 	            var sessionlv=  $('#sessionlv').val();
 	            
 	            
@@ -211,10 +209,9 @@ $(document).ready(function() {
 	            	}
 	            	}
 	            });
-	            
-	            
 
 	         });
+	         //검색 결과가 없을때 count 0으로 만들기
 	            if (data == 'null' || data =="" ) {
 	            	  count = 0;
 	            	  $("#countmax").val(count);
@@ -224,7 +221,6 @@ $(document).ready(function() {
 	            console.log("cnt:"+cnt);
 	            var pageSize = 10; // 페이지당 보여줄 개수
 	            var totalPages = Math.ceil(cnt / pageSize); // 전체 페이지 수 계산
-	            //$('#maxcount').val(count);
 	            createPageButtons(totalPages);
 	      },
 	      error : function() {
@@ -234,6 +230,38 @@ $(document).ready(function() {
 	}
 
 </script>
+<!-- 버튼 생성 -->
+<script type="text/javascript">
+
+
+//페이지 버튼
+function createPageButtons(totalPages) {
+	   // 버튼 그룹 요소를 가져(id 선택)
+	   var buttonGroup = $(".button-group");
+	   // buttonGroup 초기화 
+	   buttonGroup.empty();
+
+	   // totalPages 만큼 반복하여 페이지 버튼을 생성
+	   for (var i = 1; i <= totalPages; i++) {
+	      // 숫자 i를 텍스트로 갖는 버튼 요소를 생성
+	      var button = $("<button>").text(i);
+	      // 버튼 클릭 이벤트를 정의
+	      button.click(function() {
+	         // 클릭한 버튼의 텍스트 값을 가져와서 page 변수에 저장
+	         var page = $(this).text();
+	         // 해당 페이지의 게시물 데이터를 로드하는 함수를 호출
+	         loadBoardData(page);
+	         // 버튼 그룹 내의 모든 버튼에서 active 클래스를 제거
+	         buttonGroup.find("button").removeClass("active");
+	         //클릭한 버튼에 active 클래스를 추가
+	         $(this).addClass("active");
+	      });
+	      // 버튼을 버튼 그룹에 추가
+	      buttonGroup.append(button);
+	   }
+	}
+</script>
+
 
 <title>List</title>
 </head>
@@ -250,7 +278,7 @@ $(document).ready(function() {
             <br>
             <a href="/boardwrite.do" class="add-button">글쓰기</a>
          </div>
-         총 게시물 수 <input type="text" id="countmax" readonly style="outline:none;border-style: none;width:20px;font-size:18px"> 개
+         총 게시물 수 <input type="text" id="countmax" readonly style="outline:none;border-style: none;width:25px;font-size:18px"> 개
          <table class="table">
          
             <thead>
@@ -272,34 +300,4 @@ $(document).ready(function() {
       
       
 </body>
-<script type="text/javascript">
-
-
-//페이지 버튼
-function createPageButtons(totalPages) {
-	   // 버튼 그룹 요소를 가져
-	   var buttonGroup = $(".button-group");
-	   // buttonGroup 초기화 
-	   buttonGroup.empty();
-
-	   // totalPages 만큼 반복하여 페이지 버튼을 생성
-	   for (var i = 1; i <= totalPages; i++) {
-	      // 숫자 i를 텍스트로 갖는 버튼 요소를 생성
-	      var button = $("<button>").text(i);
-	      // 버튼 클릭 이벤트를 정의
-	      button.click(function() {
-	         // 클릭한 버튼의 텍스트 값을 가져와서 page 변수에 저장
-	         var page = $(this).text();
-	         // 해당 페이지의 게시물 데이터를 로드하는 함수를 호출
-	         loadBoardData(page);
-	         // 버튼 그룹 내의 모든 버튼에서 "active" 클래스를 제거
-	         buttonGroup.find("button").removeClass("active");
-	         //클릭한 버튼에 "active" 클래스를 추가
-	         $(this).addClass("active");
-	      });
-	      // 버튼을 버튼 그룹에 추가(생성)
-	      buttonGroup.append(button);
-	   }
-	}
-</script>
 </html>
